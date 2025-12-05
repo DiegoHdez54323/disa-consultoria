@@ -1,5 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { ServicesSection } from "../components/ServicesSection"; // (Si sigue siendo React)
+import { PortfolioSection } from "../components/PortfolioSection"; // (Si sigue siendo React)
+import BlogSection from "../components/BlogSection.astro";
+import ContactSection from "../components/ContactSection.astro";
 ---
 
-<Layout />
+<Layout>
+  <main>
+    <ServicesSection client:load />
+    <PortfolioSection client:load />
+    <BlogSection />
+    <ContactSection />
+  </main>
+</Layout>
