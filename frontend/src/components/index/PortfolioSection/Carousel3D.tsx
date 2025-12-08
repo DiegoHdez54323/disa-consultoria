@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProjectCard } from "./ProjectCard";
-import type { Project } from "../../../data/portfolioProjects";
+import type { PortfolioProject } from "../../../sanity/types/portfolio";
 
 interface Carousel3DProps {
-  projects: Project[];
+  projects: PortfolioProject[];
   autoPlay?: boolean;
   autoPlayInterval?: number;
 }
