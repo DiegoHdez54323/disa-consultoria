@@ -12,12 +12,15 @@ const allServices: Service[] = await getAllServices();
 
 import { getAllPortfolioProjects } from "../services/portfolioService";
 const portfolioProjects = await getAllPortfolioProjects();
+
+import { getLatestBlogPosts } from "../services/blogService";
+const latestBlogPosts = await getLatestBlogPosts();
 ---
 
 <BaseLayout>
   <HeroSection client:load />
   <ServicesSection services={allServices} />
   <PortfolioSection projects={portfolioProjects} />
-  <BlogSection />
+  <BlogSection posts={latestBlogPosts} />
   <ContactSection />
 </BaseLayout>

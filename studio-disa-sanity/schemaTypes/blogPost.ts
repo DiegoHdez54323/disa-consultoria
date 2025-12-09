@@ -64,6 +64,14 @@ export const blogPost = defineType({
     }),
 
     defineField({
+      name: 'featured',
+      title: 'Destacado',
+      type: 'boolean',
+      description: 'Marca esta opción si quieres que el post sea marcado como destacado.',
+      initialValue: false,
+    }),
+
+    defineField({
       name: 'author',
       title: 'Autor',
       type: 'reference',

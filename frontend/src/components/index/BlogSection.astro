@@ -1,46 +1,36 @@
 ---
 import { ArrowRight, Clock, User } from "lucide-astro";
+import type { BlogPost } from "../../sanity/types/blog";
+import { urlForImage } from "../../sanity/lib/url-for-image";
 
-// Datos corregidos y con imágenes seguras
-const blogPosts = [
-  {
-    title: "El Futuro de la IA Generativa",
-    excerpt:
-      "Exploramos cómo las herramientas de IA están transformando la forma en que escribimos código.",
-    author: "Carlos Méndez",
-    date: "28 Nov 2024",
-    readTime: "5 min",
-    category: "Inteligencia Artificial",
-    // Usamos imágenes de placeholder seguras de tecnología
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
-    slug: "futuro-ia-generativa",
-  },
-  {
-    title: "Arquitecturas Serverless",
-    excerpt:
-      "Descubre cómo las arquitecturas sin servidor pueden reducir costos y aumentar la eficiencia.",
-    author: "Ana García",
-    date: "25 Nov 2024",
-    readTime: "7 min",
-    category: "Cloud Computing",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-    slug: "arquitecturas-serverless",
-  },
-  {
-    title: "Design Systems",
-    excerpt:
-      "Cómo implementar un sistema de diseño que mejore la colaboración entre equipos.",
-    author: "María López",
-    date: "22 Nov 2024",
-    readTime: "6 min",
-    category: "UX/UI",
-    image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
-    slug: "design-systems",
-  },
-];
+interface Props {
+  posts: BlogPost[];
+}
+
+const { posts } = Astro.props;
+
+function getPostImageUrl(post: BlogPost) {
+  if (!post.mainImage?.source) return "";
+  try {
+    return urlForImage(post.mainImage.source)
+      .width(800)
+      .height(450)
+      .fit("crop")
+      .url();
+  } catch {
+    return "";
+  }
+}
+
+function formatDate(dateString: string) {
+  const d = new Date(dateString);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("es-MX", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
 ---
 
 <section class="relative py-24 bg-background overflow-hidden" id="blog-section">
@@ -64,7 +54,8 @@ const blogPosts = [
         <h2
           class="font-orbitron text-3xl md:text-5xl font-bold text-foreground mb-4"
         >
-          Ideas que <span
+          Ideas que
+          <span
             class="text-gradient-primary bg-clip-text text-transparent bg-linear-to-r from-primary to-accent"
             >impulsan</span
           >
@@ -87,59 +78,79 @@ const blogPosts = [
     </div>
 
     {/* Grid de Posts */}
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {
-        blogPosts.map((post, index) => (
-          <article
-            class="group relative opacity-0 translate-y-8 transition-all duration-500 ease-out scroll-reveal"
-            style={`transition-delay: ${index * 150}ms`}
-          >
-            <a href={`/blog/${post.slug}`} class="block h-full">
-              <div class="relative h-full rounded-2xl overflow-hidden border border-border/50 bg-card transition-all duration-500 hover:border-primary/30 hover:glow-primary">
-                {/* Contenedor de Imagen */}
-                <div class="relative h-52 overflow-hidden bg-muted">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 bg-linear-to-t from-card via-transparent to-transparent" />
+    {
+      posts.length === 0 ? (
+        <p class="text-sm text-muted-foreground">
+          Aún no hay artículos publicados.
+        </p>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post, index) => {
+            const imgUrl = getPostImageUrl(post);
+            const category =
+              post.categories && post.categories.length > 0
+                ? post.categories[0].title
+                : "Sin categoría";
+            const dateLabel = formatDate(post.publishedAt);
+            const readTimeLabel = post.readTime ? `${post.readTime} min` : "";
 
-                  <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-inter font-medium backdrop-blur-sm">
-                    {post.category}
-                  </div>
-                </div>
+            return (
+              <article
+                class="group relative opacity-0 translate-y-8 transition-all duration-500 ease-out scroll-reveal"
+                style={`transition-delay: ${index * 150}ms`}
+              >
+                <a href={`/blog/${post.slug}`} class="block h-full">
+                  <div class="relative h-full rounded-2xl overflow-hidden border border-border/50 bg-card transition-all duration-500 hover:border-primary/30 hover:glow-primary">
+                    {/* Contenedor de Imagen */}
+                    <div class="relative h-52 overflow-hidden bg-muted">
+                      {imgUrl && (
+                        <img
+                          src={imgUrl}
+                          alt={post.mainImage?.alt || post.title}
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                      )}
+                      <div class="absolute inset-0 bg-linear-to-t from-card via-transparent to-transparent" />
 
-                {/* Contenido Texto */}
-                <div class="p-6">
-                  <h3 class="font-orbitron text-lg font-semibold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  <p class="font-inter text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
-
-                  <div class="flex items-center justify-between text-xs text-muted-foreground">
-                    <div class="flex items-center gap-2">
-                      <User class="w-3 h-3" />
-                      <span>{post.author}</span>
+                      <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-inter font-medium backdrop-blur-sm">
+                        {category}
+                      </div>
                     </div>
-                    <div class="flex items-center gap-4">
-                      <span>{post.date}</span>
-                      <div class="flex items-center gap-1">
-                        <Clock class="w-3 h-3" />
-                        <span>{post.readTime}</span>
+
+                    {/* Contenido Texto */}
+                    <div class="p-6">
+                      <h3 class="font-orbitron text-lg font-semibold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h3>
+                      <p class="font-inter text-sm text-muted-foreground mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+
+                      <div class="flex items-center justify-between text-xs text-muted-foreground">
+                        <div class="flex items-center gap-2">
+                          <User class="w-3 h-3" />
+                          <span>{post.author.name}</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                          <span>{dateLabel}</span>
+                          {readTimeLabel && (
+                            <div class="flex items-center gap-1">
+                              <Clock class="w-3 h-3" />
+                              <span>{readTimeLabel}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </a>
-          </article>
-        ))
-      }
-    </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      )
+    }
   </div>
 </section>
 
