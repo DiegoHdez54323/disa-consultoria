@@ -1,4 +1,3 @@
-// schemas/servicesType.ts
 import {defineType, defineField} from 'sanity'
 
 export const servicesType = defineType({

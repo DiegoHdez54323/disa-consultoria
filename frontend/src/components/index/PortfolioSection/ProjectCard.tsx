@@ -1,28 +1,44 @@
 import { ExternalLink, Github } from "lucide-react";
-import type { Project } from "../../../data/portfolioProjects";
+import type { PortfolioProject } from "../../../sanity/types/portfolio";
+import { urlForImage } from "../../../sanity/lib/url-for-image";
 
 type Props = {
-  project: Project;
+  project: PortfolioProject;
 };
 
 export const ProjectCard = ({ project }: Props) => {
+  const imageUrl = project.image?.source
+    ? urlForImage(project.image.source)
+        .width(1200)
+        .height(800)
+        .fit("crop")
+        .url()
+    : "";
+
+  const primaryCategory =
+    project.categories && project.categories.length > 0
+      ? project.categories[0].title
+      : "Sin categoría";
+
+  const overlayColor = project.color ?? "";
+
   return (
     <div className="group relative h-full bg-card/80">
       <div className="relative h-full rounded-2xl overflow-hidden transition-all duration-500 hover:border-primary/30">
         {/* Image */}
         <div className="relative h-48 md:h-56 overflow-hidden">
           <img
-            src={project.image}
-            alt={project.title}
+            src={imageUrl}
+            alt={project.image.alt || project.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div
-            className={`absolute inset-0 bg-linear-to-t ${project.color} opacity-40 group-hover:opacity-60 transition-opacity`}
+            className={`absolute inset-0 bg-linear-to-t ${overlayColor} opacity-40 group-hover:opacity-60 transition-opacity`}
           />
 
           {/* Category badge */}
           <div className="absolute top-4 left-4 px-3 py-1 rounded-full glass text-xs font-inter font-medium text-foreground">
-            {project.category}
+            {primaryCategory}
           </div>
 
           {/* Action buttons */}

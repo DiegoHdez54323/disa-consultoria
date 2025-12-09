@@ -13,9 +13,12 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sanity({
-    projectId: "tyjgqdg3",
-    dataset: "production",
-    useCdn: false, // for static builds
-  }), react()],
+  integrations: [
+    sanity({
+      projectId: "tyjgqdg3",
+      dataset: "production",
+      useCdn: false, // for static builds
+    }),
+    react(),
+  ],
 });
