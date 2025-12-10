@@ -1,8 +1,14 @@
 ---
 import { Carousel3D } from "./Carousel3D";
-import { projects } from "../../../data/portfolioProjects";
+import type { PortfolioProject } from "../../../sanity/types/portfolio";
 
 const STAGGER_MS = 80;
+
+interface Props {
+  projects: PortfolioProject[];
+}
+
+const { projects } = Astro.props;
 ---
 
 <section class="relative py-24 overflow-visible">
