@@ -109,7 +109,7 @@ const BlogPagination: React.FC<BlogPaginationProps> = ({
           }`}
         >
           <span
-            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duración-300 ${
+            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duration-300 ${
               canGoPrev ? "group-hover:scale-100" : ""
             }`}
           />
@@ -127,14 +127,14 @@ const BlogPagination: React.FC<BlogPaginationProps> = ({
             onNavigate();
           }}
           aria-disabled={!canGoPrev}
-          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duración-300 ${
+          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duration-300 ${
             !canGoPrev
               ? "text-muted-foreground/50 cursor-not-allowed pointer-events-none"
               : "text-foreground hover:text-primary"
           }`}
         >
           <span
-            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duración-300 ${
+            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duration-300 ${
               canGoPrev ? "group-hover:scale-100" : ""
             }`}
           />
@@ -191,14 +191,14 @@ const BlogPagination: React.FC<BlogPaginationProps> = ({
         <button
           onClick={handleSearchNext}
           disabled={!canGoNext}
-          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duración-300 ${
+          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duration-300 ${
             !canGoNext
               ? "text-muted-foreground/50 cursor-not-allowed"
               : "text-foreground hover:text-primary"
           }`}
         >
           <span
-            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duración-300 ${
+            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duration-300 ${
               canGoNext ? "group-hover:scale-100" : ""
             }`}
           />
@@ -216,14 +216,14 @@ const BlogPagination: React.FC<BlogPaginationProps> = ({
             onNavigate();
           }}
           aria-disabled={!canGoNext}
-          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duración-300 ${
+          className={`group relative flex items-center gap-2 px-4 py-2 rounded-full font-inter text-sm transition-all duration-300 ${
             !canGoNext
               ? "text-muted-foreground/50 cursor-not-allowed pointer-events-none"
               : "text-foreground hover:text-primary"
           }`}
         >
           <span
-            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duración-300 ${
+            className={`absolute inset-0 rounded-full bg-primary/10 scale-0 transition-transform duration-300 ${
               canGoNext ? "group-hover:scale-100" : ""
             }`}
           />

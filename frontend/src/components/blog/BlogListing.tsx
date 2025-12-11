@@ -1,4 +1,3 @@
-import { useState, useMemo } from "react";
 import type { BlogPost } from "../../sanity/types/blog";
 import { POSTS_PER_PAGE } from "../../config/blog";
 
@@ -9,19 +8,16 @@ import {
   getPostImageUrl,
 } from "../../utils/blog/post-helpers";
 
+import { useBlogListing } from "../../hooks/useBlogListing";
+import { buildBlogPageHref } from "../../utils/blog/routes";
+import type { BlogScope, BlogCategoryUI } from "../../types/blog-ui";
+
 import BlogHero from "./BlogHero";
 import BlogCategories from "./BlogCategories";
 import BlogFeaturedPost from "./BlogFeaturedPost";
 import BlogPostCard from "./BlogPostCard";
 import BlogPagination from "./BlogPagination";
 import BlogResultsInfo from "./BlogResultsInfo";
-
-type BlogScope = "all" | "category";
-
-interface BlogCategoryUI {
-  slug: string;
-  title: string;
-}
 
 interface BlogListingProps {
   scope: BlogScope;
@@ -51,51 +47,27 @@ const BlogListing: React.FC<BlogListingProps> = ({
   featuredPost,
   basePath,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchPage, setSearchPage] = useState(1);
+  const {
+    searchTerm,
+    isSearching,
+    currentPage,
+    totalPagesToUse,
+    totalPostsToUse,
+    visiblePosts,
+    canGoPrev,
+    canGoNext,
+    goToSearchPage,
+    handleSearchChange,
+  } = useBlogListing({
+    page,
+    totalPages,
+    totalPostsInScope,
+    pagePosts,
+    allScopePosts,
+  });
 
-  const isSearching = searchTerm.trim().length > 0;
-
-  // -------- Búsqueda sobre allScopePosts --------
-
-  const filteredBySearch = useMemo(() => {
-    if (!isSearching) return allScopePosts;
-
-    const term = searchTerm.toLowerCase();
-
-    return allScopePosts.filter((post) => {
-      const inTitle = post.title.toLowerCase().includes(term);
-      const inExcerpt = post.excerpt.toLowerCase().includes(term);
-      const inAuthor = post.author.name.toLowerCase().includes(term);
-      const inCategories = post.categories.some((c) =>
-        c.title.toLowerCase().includes(term)
-      );
-      return inTitle || inExcerpt || inAuthor || inCategories;
-    });
-  }, [allScopePosts, isSearching, searchTerm]);
-
-  const searchTotalPages = useMemo(() => {
-    if (!isSearching) return 0;
-    return Math.ceil(filteredBySearch.length / POSTS_PER_PAGE);
-  }, [filteredBySearch.length, isSearching]);
-
-  const visiblePosts: BlogPost[] = useMemo(() => {
-    if (!isSearching) {
-      return pagePosts;
-    }
-    const startIndex = (searchPage - 1) * POSTS_PER_PAGE;
-    return filteredBySearch.slice(startIndex, startIndex + POSTS_PER_PAGE);
-  }, [isSearching, pagePosts, filteredBySearch, searchPage]);
-
-  const currentPage = isSearching ? searchPage : page;
-  const totalPagesToUse = isSearching ? searchTotalPages : totalPages;
-  const totalPostsToUse = isSearching
-    ? filteredBySearch.length
-    : totalPostsInScope;
-
-  const handleSearchChange = (value: string) => {
-    setSearchTerm(value);
-    setSearchPage(1);
+  const scrollToBlogTop = () => {
+    window.scrollTo({ top: 400, behavior: "smooth" });
   };
 
   const shouldShowFeatured = scope === "all" && !isSearching && !!featuredPost;
@@ -103,28 +75,18 @@ const BlogListing: React.FC<BlogListingProps> = ({
   const buildPageHref = (targetPage: number) => {
     if (isSearching) return "#";
 
-    if (scope === "all") {
-      if (targetPage <= 1) return "/blog";
-      return `/blog/page/${targetPage}`;
-    }
-
-    if (targetPage <= 1) {
-      return `${basePath}/page/1`;
-    }
-    return `${basePath}/page/${targetPage}`;
+    return buildBlogPageHref({
+      scope,
+      basePath,
+      targetPage,
+    });
   };
 
-  const goToSearchPage = (target: number) => {
-    if (!isSearching) return;
-    setSearchPage(target);
-    window.scrollTo({ top: 400, behavior: "smooth" });
-  };
-
-  const canGoPrev = currentPage > 1;
-  const canGoNext = totalPagesToUse > 0 && currentPage < totalPagesToUse;
-
-  const scrollAfterNav = () => {
-    window.scrollTo({ top: 400, behavior: "smooth" });
+  const goToSearchPageAndScroll = (target: number) => {
+    goToSearchPage(target);
+    if (isSearching) {
+      scrollToBlogTop();
+    }
   };
 
   return (
@@ -134,7 +96,7 @@ const BlogListing: React.FC<BlogListingProps> = ({
       <BlogCategories
         categories={categories}
         activeCategorySlug={activeCategorySlug}
-        onNav={scrollAfterNav}
+        onNav={scrollToBlogTop}
       />
 
       {shouldShowFeatured && featuredPost && (
@@ -169,9 +131,9 @@ const BlogListing: React.FC<BlogListingProps> = ({
             totalPages={totalPagesToUse}
             canGoPrev={canGoPrev}
             canGoNext={canGoNext}
-            onSearchPageChange={goToSearchPage}
+            onSearchPageChange={goToSearchPageAndScroll}
             buildPageHref={buildPageHref}
-            onNavigate={scrollAfterNav}
+            onNavigate={scrollToBlogTop}
           />
 
           <BlogResultsInfo

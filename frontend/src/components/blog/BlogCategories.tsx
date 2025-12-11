@@ -1,7 +1,4 @@
-interface BlogCategoryUI {
-  slug: string;
-  title: string;
-}
+import type { BlogCategoryUI } from "../../types/blog-ui";
 
 interface BlogCategoriesProps {
   categories: BlogCategoryUI[];
