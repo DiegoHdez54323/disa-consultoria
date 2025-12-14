@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-// Esquema de validación compartido (puedes moverlo a un archivo utils si prefieres)
+// Esquema de validacion
 const contactSchema = z.object({
   name: z.string().min(2, "El nombre es muy corto"),
   email: z.string().email("Email inválido"),
@@ -32,8 +32,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Enviar correo con Resend
     const data = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>', // Usa tu dominio verificado en prod
-      to: ['hola@disa.tech'], // Tu correo real
+      from: 'Contact Form <onboarding@resend.dev>', 
+      to: ['diazalexda2@gmail.com'], 
       subject: `Nuevo mensaje de ${name} ${company ? `- ${company}` : ''}`,
       html: `
         <h1>Nuevo Contacto desde la Web</h1>
