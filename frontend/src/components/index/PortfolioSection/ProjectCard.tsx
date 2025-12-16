@@ -27,7 +27,7 @@ export const ProjectCard = ({ project }: Props) => {
     <div className="group relative h-full bg-card/80">
       <div className="relative h-full rounded-2xl overflow-hidden transition-all duration-500 hover:border-primary/30">
         {/* Image */}
-        <div className="relative h-48 md:h-56 overflow-hidden">
+        <div className="relative h-48 lg:h-56 overflow-hidden">
           <img
             src={imageUrl}
             alt={project.image.alt || project.title}
@@ -54,8 +54,8 @@ export const ProjectCard = ({ project }: Props) => {
         </div>
 
         {/* Content */}
-        <div className="p-5 md:p-6">
-          <h3 className="font-sora text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+        <div className="p-5 lg:p-6">
+          <h3 className="font-sora text-lg lg:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
             {project.title}
           </h3>
           <p className="font-inter text-sm text-muted-foreground mb-4 line-clamp-2">

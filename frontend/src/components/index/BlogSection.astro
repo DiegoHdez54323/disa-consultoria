@@ -44,7 +44,7 @@ function formatDate(dateString: string) {
   <div class="relative container mx-auto px-6">
     {/* Header */}
     <div
-      class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 opacity-0 translate-y-8 transition-all duration-700 ease-out scroll-reveal"
+      class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 opacity-0 translate-y-8 transition-all duration-700 ease-out scroll-reveal"
     >
       <div>
         <span
@@ -53,7 +53,7 @@ function formatDate(dateString: string) {
           Blog
         </span>
         <h2
-          class="font-orbitron text-3xl md:text-5xl font-bold text-foreground mb-4"
+          class="font-orbitron text-3xl lg:text-5xl font-bold text-foreground mb-4"
         >
           Ideas que
           <span
@@ -69,7 +69,7 @@ function formatDate(dateString: string) {
 
       <a
         href="/blog"
-        class="mt-6 md:mt-0 inline-flex items-center gap-2 text-primary font-inter font-medium hover:gap-3 transition-all group"
+        class="mt-6 lg:mt-0 inline-flex items-center gap-2 text-primary font-inter font-medium hover:gap-3 transition-all group"
       >
         Ver todos los artículos
         <ArrowRight
@@ -85,7 +85,7 @@ function formatDate(dateString: string) {
           Aún no hay artículos publicados.
         </p>
       ) : (
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {posts.map((post, index) => {
             const imgUrl = getPostImageUrl(post);
             const category =

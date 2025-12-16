@@ -45,7 +45,7 @@ function getIconComponent(iconName: string) {
         Nuestros Servicios
       </span>
       <h2
-        class="font-orbitron text-3xl md:text-5xl font-bold text-foreground mb-4"
+        class="font-orbitron text-3xl lg:text-5xl font-bold text-foreground mb-4"
       >
         Soluciones que
         <span class="text-gradient-primary"> transforman</span>
@@ -57,7 +57,7 @@ function getIconComponent(iconName: string) {
     </div>
 
     {/* Services Grid */}
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
       {
         services.map((service, index) => {
           const Icon = getIconComponent(service.icon);

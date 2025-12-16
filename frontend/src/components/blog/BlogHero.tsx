@@ -22,9 +22,9 @@ const BlogHero: React.FC<BlogHeroProps> = ({ searchTerm, onSearchChange }) => {
           <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-sm font-inter font-medium mb-6">
             Blog
           </span>
-          <h1 className="font-sora text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Ideas que <span className="text-gradient-primary">impulsan</span>
-          </h1>
+          <h1 className="font-sora text-4xl lg:text-6xl font-bold text-foreground mb-6">
+          Ideas que <span className="text-gradient-primary">impulsan</span>
+        </h1>
           <p className="font-inter text-xl text-muted-foreground mb-8">
             Artículos, guías y reflexiones sobre tecnología, desarrollo y el
             futuro digital.

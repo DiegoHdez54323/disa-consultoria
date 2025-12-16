@@ -49,7 +49,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+            className="font-orbitron text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
           >
             <span className="text-foreground">Diseñamos el</span>
             <br />
@@ -64,7 +64,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-inter text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
             Somos una consultoría joven que piensa diferente. Creamos soluciones
             tecnológicas escalables, modernas y eficientes usando las
@@ -99,7 +99,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col lg:flex-row items-center justify-center gap-4"
           >
             <a
               href="/contacto"

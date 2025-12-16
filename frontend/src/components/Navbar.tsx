@@ -172,7 +172,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link, index) => (
             <motion.div
               key={link.href}
@@ -279,7 +279,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <motion.button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-foreground relative"
+          className="lg:hidden p-2 text-foreground relative"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -325,7 +325,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto", y: 0 }}
             exit={{ opacity: 0, height: 0, y: -20 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden absolute top-full left-0 right-0 mx-4 mt-2 overflow-hidden"
+            className="lg:hidden absolute top-full left-0 right-0 mx-4 mt-2 overflow-hidden"
           >
             <motion.div
               className="glass-strong rounded-2xl p-4 border border-primary/20"

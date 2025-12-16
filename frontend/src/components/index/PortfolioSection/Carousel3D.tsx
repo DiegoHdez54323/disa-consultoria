@@ -80,7 +80,7 @@ export const Carousel3D = ({
     <div className="relative w-full">
       {/* Carousel Container */}
       <div
-        className="relative h-[500px] md:h-[580px] overflow-visible"
+        className="relative h-[500px] lg:h-[580px] overflow-visible"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -121,7 +121,7 @@ export const Carousel3D = ({
                   mass: 1,
                 }}
                 style={{ perspective: 1000 }}
-                className="absolute w-[80%] md:w-[42%] lg:w-[38%] cursor-pointer"
+                className="absolute w-[80%] lg:w-[42%] cursor-pointer"
                 onClick={() => {
                   if (position === "left") prev();
                   if (position === "right") next();
@@ -133,7 +133,7 @@ export const Carousel3D = ({
                     ${
                       position === "center"
                         ? "shadow-[0_25px_60px_-15px_rgba(0,200,255,0.3)]"
-                        : "pointer-events-none md:pointer-events-auto"
+                        : "pointer-events-none lg:pointer-events-auto"
                     }
                   `}
                   whileHover={position === "center" ? { scale: 1.02 } : {}}
@@ -149,7 +149,7 @@ export const Carousel3D = ({
       {/* Navigation Arrows */}
       <button
         onClick={prev}
-        className="cursor-pointer absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-card/80 border border-border/50 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 group"
+        className="cursor-pointer absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-card/80 border border-border/50 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 group"
         aria-label="Anterior"
       >
         <ChevronLeft className="w-5 h-5 text-foreground group-hover:text-primary transition-colors" />

@@ -29,19 +29,22 @@ const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
           animate={{ opacity: 1, y: 0 }}
           className="group relative grid lg:grid-cols-2 gap-8 items-center"
         >
-          <div className="relative h-80 lg:h-[400px] rounded-2xl overflow-hidden">
+          <a
+            href={`/blog/${post.slug}`}
+            className="relative h-80 lg:h-[400px] rounded-2xl overflow-hidden block"
+          >
             <img
               src={getImageUrl(post) || ""}
               alt={post.mainImage?.alt || post.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-linear-to-t from-card via-transparent to-transparent" />
-          </div>
+          </a>
           <div>
             <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-inter font-medium mb-4">
               Destacado · {mainCategory?.title ?? "Blog"}
             </span>
-            <h2 className="font-sora text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
+            <h2 className="font-sora text-2xl lg:text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
               {post.title}
             </h2>
             <p className="font-inter text-muted-foreground mb-6">

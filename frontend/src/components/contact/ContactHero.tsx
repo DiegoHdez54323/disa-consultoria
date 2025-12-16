@@ -66,7 +66,7 @@ export const ContactHero = () => {
               }}
               className="relative inline-block"
             >
-              <span className="font-sora text-5xl md:text-7xl font-bold text-gradient-primary">
+              <span className="font-sora text-5xl lg:text-7xl font-bold text-gradient-primary">
                 Próximo Proyecto
               </span>
             </motion.div>

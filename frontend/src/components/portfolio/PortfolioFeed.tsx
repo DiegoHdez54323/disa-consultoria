@@ -4,18 +4,27 @@ import { Filter, X } from "lucide-react";
 import { ProjectCard } from "./ProjectCard";
 import type { PortfolioProject } from "../../sanity/types/portfolio";
 
-export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) => {
+export const PortfolioFeed = ({
+  projects,
+}: {
+  projects: PortfolioProject[];
+}) => {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [showFilters, setShowFilters] = useState(false);
 
   // Extraemos las categorías únicas de los proyectos para crear el menú
-  const allCategories = projects.flatMap(p => p.categories.map(c => c.title));
+  const allCategories = projects.flatMap((p) =>
+    p.categories.map((c) => c.title)
+  );
   const uniqueCategories = ["Todos", ...new Set(allCategories)];
 
   // Filtramos los proyectos
-  const filteredProjects = activeCategory === "Todos"
-    ? projects
-    : projects.filter(p => p.categories.some(c => c.title === activeCategory));
+  const filteredProjects =
+    activeCategory === "Todos"
+      ? projects
+      : projects.filter((p) =>
+          p.categories.some((c) => c.title === activeCategory)
+        );
 
   return (
     <>
@@ -23,9 +32,8 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
       <section className="relative py-8 border-y border-border/30">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between gap-4">
-            
             {/* Desktop filters */}
-            <div className="hidden md:flex flex-wrap items-center gap-3">
+            <div className="hidden lg:flex flex-wrap items-center gap-3">
               {uniqueCategories.map((category) => (
                 <motion.button
                   key={category}
@@ -47,7 +55,7 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowFilters(!showFilters)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/50 text-foreground"
+              className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/50 text-foreground"
             >
               <Filter className="w-4 h-4" />
               <span className="font-inter text-sm">Filtrar</span>
@@ -55,7 +63,10 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
 
             {/* Project count */}
             <div className="font-inter text-sm text-muted-foreground">
-              <span className="text-primary font-semibold">{filteredProjects.length}</span> proyectos
+              <span className="text-primary font-semibold">
+                {filteredProjects.length}
+              </span>{" "}
+              proyectos
             </div>
           </div>
 
@@ -66,7 +77,7 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="md:hidden overflow-hidden mt-4"
+                className="lg:hidden overflow-hidden mt-4"
               >
                 <div className="flex flex-wrap gap-2 py-4">
                   {uniqueCategories.map((category) => (
@@ -94,8 +105,8 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
 
       {/* Projects Grid */}
       <section className="relative py-20">
-         {/* Background decoration */}
-         <div className="absolute inset-0 pointer-events-none">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-0 w-1 h-32 bg-gradient-to-b from-primary/50 to-transparent" />
           <div className="absolute bottom-1/4 right-0 w-1 h-32 bg-gradient-to-t from-secondary/50 to-transparent" />
         </div>
@@ -103,7 +114,7 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
         <div className="container mx-auto px-6">
           <motion.div
             layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
