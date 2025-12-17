@@ -3,8 +3,14 @@ import { Sparkles } from "lucide-react";
 
 export const ContactHero = () => {
   const benefits = [
-    { title: "Respuesta Rápida", description: "Contestamos en menos de 24 horas" },
-    { title: "Equipo Dedicado", description: "Un experto asignado a tu proyecto" },
+    {
+      title: "Respuesta Rápida",
+      description: "Contestamos en menos de 24 horas",
+    },
+    {
+      title: "Equipo Dedicado",
+      description: "Un experto asignado a tu proyecto",
+    },
     { title: "Disponibilidad", description: "Lunes a Viernes, 9am - 7pm" },
   ];
 
@@ -44,7 +50,7 @@ export const ContactHero = () => {
               initial={{ y: 100 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-sora text-5xl md:text-7xl font-bold text-foreground"
+              className="font-sora text-5xl lg:text-7xl font-bold text-foreground"
             >
               Hablemos de tu
             </motion.h1>
@@ -53,7 +59,11 @@ export const ContactHero = () => {
             <motion.div
               initial={{ y: 100 }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="relative inline-block"
             >
               <span className="font-sora text-5xl md:text-7xl font-bold text-gradient-primary">
@@ -68,8 +78,9 @@ export const ContactHero = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="font-inter text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Cada gran proyecto comienza con una conversación. Cuéntanos tu visión y
-            juntos la convertiremos en una experiencia digital extraordinaria.
+            Cada gran proyecto comienza con una conversación. Cuéntanos tu
+            visión y juntos la convertiremos en una experiencia digital
+            extraordinaria.
           </motion.p>
 
           <motion.div
@@ -83,9 +94,15 @@ export const ContactHero = () => {
                 key={benefit.title}
                 className="flex flex-col items-center sm:flex-row sm:items-start gap-2 px-5 py-3 rounded-full bg-muted/30 border border-border/50 text-center sm:text-left"
               >
-                <div className="text-sm font-inter font-semibold text-foreground">{benefit.title}</div>
-                <div className="text-xs text-muted-foreground hidden sm:block">•</div>
-                <div className="text-xs text-muted-foreground">{benefit.description}</div>
+                <div className="text-sm font-inter font-semibold text-foreground">
+                  {benefit.title}
+                </div>
+                <div className="text-xs text-muted-foreground hidden sm:block">
+                  •
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {benefit.description}
+                </div>
               </div>
             ))}
           </motion.div>
