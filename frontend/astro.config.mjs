@@ -29,7 +29,7 @@ export default defineConfig({
       lastmod: new Date(),
       serialize: (item) => {
         if (
-          item.url === "https://disaconsultoria.com/" ||
+          item.url === "https://disa-consultoria.vercel.app/" ||
           item.url.includes("/blog/")
         ) {
           item.priority = 1.0;
