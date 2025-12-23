@@ -4,6 +4,7 @@ import {blogAuthor} from './blogAuthor'
 import {servicesType} from './servicesType'
 import {portfolioCategory} from './portfolioCategory'
 import {portfolioType} from './portfolioType'
+import {usedTopics} from './usedTopics'
 
 import {blockContentType} from './blockContent'
 
@@ -12,6 +13,7 @@ export const schemaTypes = [
   blogCategory,
   blogPost,
   blogAuthor,
+  usedTopics,
   servicesType,
   portfolioCategory,
   portfolioType,
