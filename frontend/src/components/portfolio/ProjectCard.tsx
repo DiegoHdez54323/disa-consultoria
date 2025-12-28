@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 // Importamos los tipos de Sanity
 import type { PortfolioProject } from "../../sanity/types/portfolio";
-// Importante: Utilidad para generar URLs de imágenes de Sanity
+// Utilidad para generar URLs de imágenes de Sanity
 import { urlForImage } from "../../sanity/lib/url-for-image";
 
 export const ProjectCard = ({ project, index }: { project: PortfolioProject; index: number }) => {
@@ -37,7 +37,7 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
     ? urlForImage(project.image.source).width(800).height(600).url() 
     : "https://via.placeholder.com/800x600";
 
-  // Obtenemos la categoría principal (la primera del array)
+  // Obtenemos la categoría principal
   const mainCategory = project.categories?.[0]?.title || "Sin categoría";
 
   // Usamos el gradiente que viene de Sanity o uno por defecto
@@ -92,33 +92,48 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
             {mainCategory}
           </div>
 
-          {/* Action buttons (Opcionales, si tienes links en tu Sanity deberías usarlos aquí) */}
+          {/* Action buttons (LINK EXTERNO AQUÍ) */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -10 }}
             className="absolute top-4 right-4 flex gap-2"
           >
-            <motion.button 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 hover:bg-primary hover:border-primary transition-colors"
-            >
-              <ExternalLink className="w-4 h-4 text-foreground" />
-            </motion.button>
+            {/* Solo mostramos el botón si existe un link */}
+            {project.link && (
+              <motion.a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 hover:bg-primary hover:border-primary transition-colors cursor-pointer"
+                title="Visitar sitio web"
+              >
+                <ExternalLink className="w-4 h-4 text-foreground hover:text-white" />
+              </motion.a>
+            )}
           </motion.div>
         </div>
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-grow" style={{ transform: "translateZ(30px)" }}>
           <h3 className="font-sora text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
-            {project.title}
-            <motion.span
-              animate={{ x: isHovered ? 4 : 0, opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ArrowUpRight className="w-5 h-5 text-primary" />
-            </motion.span>
+            {/* Hacemos que el título también sea un enlace si hay link */}
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline decoration-primary/50 underline-offset-4">
+                {project.title}
+                <motion.span
+                  animate={{ x: isHovered ? 4 : 0, opacity: isHovered ? 1 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowUpRight className="w-5 h-5 text-primary" />
+                </motion.span>
+              </a>
+            ) : (
+              <span>{project.title}</span>
+            )}
           </h3>
+          
           <p className="font-inter text-sm text-muted-foreground mb-4 line-clamp-2 flex-grow">
             {project.description}
           </p>

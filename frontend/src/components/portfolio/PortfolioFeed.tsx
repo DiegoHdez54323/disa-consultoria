@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter, X } from "lucide-react";
-import { ProjectCard } from "./ProjectCard";
+import { ProjectCard } from "./ProjectCard"; // Asegúrate de que este import sea correcto
 import type { PortfolioProject } from "../../sanity/types/portfolio";
 
 export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) => {
@@ -9,13 +9,18 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
   const [showFilters, setShowFilters] = useState(false);
 
   // Extraemos las categorías únicas de los proyectos para crear el menú
-  const allCategories = projects.flatMap(p => p.categories.map(c => c.title));
+  const allCategories = projects.flatMap((p) =>
+    p.categories.map((c) => c.title)
+  );
   const uniqueCategories = ["Todos", ...new Set(allCategories)];
 
   // Filtramos los proyectos
-  const filteredProjects = activeCategory === "Todos"
-    ? projects
-    : projects.filter(p => p.categories.some(c => c.title === activeCategory));
+  const filteredProjects =
+    activeCategory === "Todos"
+      ? projects
+      : projects.filter((p) =>
+          p.categories.some((c) => c.title === activeCategory)
+        );
 
   return (
     <>
@@ -55,7 +60,10 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
 
             {/* Project count */}
             <div className="font-inter text-sm text-muted-foreground">
-              <span className="text-primary font-semibold">{filteredProjects.length}</span> proyectos
+              <span className="text-primary font-semibold">
+                {filteredProjects.length}
+              </span>{" "}
+              proyectos
             </div>
           </div>
 
@@ -94,8 +102,8 @@ export const PortfolioFeed = ({ projects }: { projects: PortfolioProject[] }) =>
 
       {/* Projects Grid */}
       <section className="relative py-20">
-         {/* Background decoration */}
-         <div className="absolute inset-0 pointer-events-none">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-0 w-1 h-32 bg-gradient-to-b from-primary/50 to-transparent" />
           <div className="absolute bottom-1/4 right-0 w-1 h-32 bg-gradient-to-t from-secondary/50 to-transparent" />
         </div>

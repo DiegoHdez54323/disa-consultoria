@@ -24,13 +24,14 @@ function mapPortfolioProject(doc: any): PortfolioProject {
     description: doc.description,
     technologies: doc.technologies ?? [],
     image: {
-      source: doc.image, // aquí va tal cual el objeto de Sanity
+      source: doc.image, 
       alt: doc.image?.alt ?? "",
     },
     color: doc.color ?? undefined,
     categories,
     gradient: doc.gradient ?? undefined,
     year: doc.year,
+    link: doc.link ?? undefined, // [!code ++] Agregamos esto aquí
   };
 }
 

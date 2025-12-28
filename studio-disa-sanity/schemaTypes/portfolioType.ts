@@ -82,6 +82,16 @@ export const portfolioType = defineType({
       type: 'string',
       description: 'Año en el que se desarrolló el proyecto.',
     }),
+
+    defineField({
+      name: 'link',
+      title: 'Enlace al Proyecto (URL)',
+      type: 'url',
+      description: 'La URL completa al sitio web del proyecto (ej. https://google.com). Déjalo vacío si no es público.',
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https']
+      })
+    }),
   ],
 
   preview: {
