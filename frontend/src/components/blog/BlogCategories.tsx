@@ -14,7 +14,7 @@ const BlogCategories: React.FC<BlogCategoriesProps> = ({
   return (
     <section className="py-4">
       <div className="container mx-auto px-6">
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="grid grid-flow-col auto-cols-max grid-rows-2 justify-start gap-3 overflow-x-auto whitespace-nowrap pb-2">
           {/* "Todos" */}
           <a
             href="/blog"
