@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="479.13156"
+   width="1699.948"
    height="504.85641"
-   viewBox="0 0 126.77022 133.5766"
+   viewBox="0 0 449.77791 133.5766"
    version="1.1"
    id="svg1"
    xml:space="preserve"
@@ -74,7 +74,7 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(4.1429556,0,0,4.1429556,-193.91379,-612.77506)" /></defs><g
      id="layer1"
-     transform="translate(-6.3152364,-0.9358551)"><path
+     transform="translate(-6.3152366,-0.9358551)"><path
        style="display:inline;fill:url(#linearGradient1068);fill-opacity:0.992157;fill-rule:nonzero;stroke:none;stroke-width:0.828592;stroke-dasharray:none;stroke-opacity:1"
        d="M 9.1492802,1.0728551 132.87801,67.116334 C 135.28521,40.35661 116.87722,2.441261 70.6711,0.93585514 Z"
        id="path1057" /><path
@@ -86,4 +86,13 @@
        id="path1082" /><path
        style="display:inline;fill:url(#linearGradient1086);fill-rule:nonzero;stroke:none;stroke-width:0.828592;stroke-dasharray:none;stroke-opacity:1"
        d="M 63.614594,106.70647 133.01503,69.308666 c -0.47848,39.429624 -22.14639,59.073354 -55.62997,64.947294 l -63.31932,0.25224 z"
-       id="path1084" /></g></svg>
+       id="path1084" /><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:133.718px;font-family:Sora;-inkscape-font-specification:Sora;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.526451;stroke-dasharray:none;stroke-opacity:1"
+       x="151.34981"
+       y="116.0462"
+       id="text1088"><tspan
+         id="tspan1088"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sora;-inkscape-font-specification:Sora;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.526451;stroke-opacity:1"
+         x="151.34981"
+         y="116.0462">DiSa</tspan></text></g></svg>
