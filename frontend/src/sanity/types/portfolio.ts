@@ -21,4 +21,5 @@ export interface PortfolioProject {
   categories: PortfolioCategory[];
   gradient?: string;
   year: string;
+  link?: string
 }

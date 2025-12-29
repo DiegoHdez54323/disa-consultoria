@@ -17,7 +17,8 @@ export const allPortfolioProjectsQuery = groq`
       "slug": slug.current
     },
     gradient,
-    year
+    year,
+    link
   }
 `;
 
@@ -41,7 +42,8 @@ export const portfolioProjectsByCategorySlugQuery = groq`
       "slug": slug.current
     },
     gradient,
-    year
+    year,
+    link
   }
 `;
 
@@ -62,6 +64,7 @@ export const portfolioProjectByIdQuery = groq`
       "slug": slug.current
     },
     gradient,
-    year
+    year,
+    link
   }
 `;
