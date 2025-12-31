@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://disa-consultoria.vercel.app/sitemap-index.xml
+Sitemap: https://disasoftware.com.mx/sitemap-index.xml
