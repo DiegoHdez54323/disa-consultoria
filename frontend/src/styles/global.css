@@ -162,6 +162,18 @@ html {
   padding-inline: 2rem;
 }
 
+@utility animate-fade-in {
+  animation: var(--animate-fade-in);
+}
+
+@utility animate-slide-up {
+  animation: var(--animate-slide-up);
+}
+
+@utility animate-scale-in {
+  animation: var(--animate-scale-in);
+}
+
 /* Design system */
 
 @layer base {

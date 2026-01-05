@@ -1,0 +1,60 @@
+---
+import { ArrowRight, Phone, Sparkles } from "lucide-react";
+
+const badges = [
+  "Diagnóstico DiSa",
+  "Prototipo conceptual",
+  "Entrega por hitos",
+];
+---
+
+<section class="relative py-24 md:py-32">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto text-center mb-20 animate-slide-up">
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        {badges.map((badge, index) => (
+          <span
+            class="px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium flex items-center gap-2 animate-scale-in"
+            style={`animation-delay: ${0.1 + index * 0.1}s;`}
+          >
+            <Sparkles className="w-3 h-3" />
+            {badge}
+          </span>
+        ))}
+      </div>
+
+      <h1 class="font-sora text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up">
+        Software a la medida con{" "}
+        <span class="text-gradient-primary">claridad y método</span>
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in"
+        style="animation-delay: 0.2s;"
+      >
+        En DiSa transformamos necesidades reales en sistemas que sí se entregan:
+        con alcance definido, prototipo conceptual y ejecución por hitos.
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
+        style="animation-delay: 0.3s;"
+      >
+        <a
+          href="/contacto?tipo=llamada"
+          class="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold px-8 py-3"
+        >
+          <Phone className="w-4 h-4" />
+          Agendar llamada inicial
+        </a>
+        <a
+          href="/servicios"
+          class="inline-flex items-center justify-center gap-2 rounded-md border border-primary/30 hover:bg-primary/10 px-8 py-3 font-semibold"
+        >
+          Ver servicios
+          <ArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
