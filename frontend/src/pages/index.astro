@@ -42,25 +42,29 @@ const schema = {
   schema={schema}
 >
   <div class="relative overflow-hidden">
-    
     <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-      <div class="absolute top-[5%] -left-[10%] w-[70%] h-[600px] bg-primary/10 blur-[130px] rounded-full"></div>
-      
-      <div class="absolute top-[35%] -right-[10%] w-[70%] h-[700px] bg-secondary/10 blur-[130px] rounded-full"></div>
-      
-      <div class="absolute top-[70%] -left-[10%] w-[70%] h-[600px] bg-accent/10 blur-[130px] rounded-full"></div>
+      <div
+        class="absolute top-[5%] -left-[10%] w-[70%] h-[600px] bg-primary/10 blur-[130px] rounded-full"
+      >
+      </div>
+
+      <div
+        class="absolute top-[35%] -right-[10%] w-[70%] h-[700px] bg-secondary/10 blur-[130px] rounded-full"
+      >
+      </div>
+
+      <div
+        class="absolute top-[70%] -left-[10%] w-[70%] h-[600px] bg-accent/10 blur-[130px] rounded-full"
+      >
+      </div>
     </div>
 
     <HeroSection client:load />
-    
-    <div class="fade-both">
-       <ServicesSection services={allServices} />
-    </div>
+
+    <ServicesSection services={allServices} />
 
     <PortfolioSection projects={portfolioProjects} />
     <BlogSection posts={latestBlogPosts} />
     <ContactSection />
-    
   </div>
-</BaseLayout>
 </BaseLayout>
