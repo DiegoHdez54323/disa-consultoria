@@ -525,6 +525,22 @@ html {
 }
 
 /* Marquee animations */
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: var(--marquee-gap, 1.5rem);
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  gap: var(--marquee-gap, 1.5rem);
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
