@@ -7,11 +7,11 @@ import {
   useSpring,
 } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
-import DisaFullLogo from "../assets/DisaFullLogo.svg?react";
+import DisaFullLogo from "../../assets/DisaFullLogo.svg?react";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Costos" },
+  { href: "/precios", label: "Precios" },
   { href: "/portafolio", label: "Portafolio" },
   { href: "/blog", label: "Blog" },
   { href: "/nosotros", label: "Nosotros" },

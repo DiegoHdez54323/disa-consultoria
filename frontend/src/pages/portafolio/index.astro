@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Footer from "../../components/Footer.astro";
+import Footer from "@/components/shared/Footer.astro";
 import { PortfolioHero } from "../../components/portfolio/PortfolioHero";
 import { PortfolioFeed } from "../../components/portfolio/PortfolioFeed";
 import CTASection from "../../components/services/CTASection.astro"; // Reutilizamos el de servicios si es igual, o creamos uno nuevo
@@ -23,9 +23,8 @@ const totalProjects = projects.length;
   <main class="min-h-screen bg-background overflow-hidden">
     <PortfolioHero client:load projectCount={totalProjects} />
 
-    <PortfolioFeed client:visible projects={projects}/>
+    <PortfolioFeed client:visible projects={projects} />
 
     <CTASection />
-
   </main>
 </BaseLayout>
