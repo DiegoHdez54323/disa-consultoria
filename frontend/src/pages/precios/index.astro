@@ -6,7 +6,7 @@ import CTASection from "../../components/services/CTASection.astro";
 import { getAllServices } from "../../services/servicesService";
 import type { ServiceCategory } from "../../sanity/types/services";
 import Faq from "../../components/nosotros/Faq.astro";
-import { ServicesInteractive } from "../../components/index/ServiceInteractive";
+import { ServicesInteractive } from "../../components/shared/ServiceInteractive";
 
 // 3. Obtenemos los datos (Fetching)
 const allServices: ServiceCategory[] = await getAllServices();
@@ -19,7 +19,7 @@ const allServices: ServiceCategory[] = await getAllServices();
 >
   <main class="min-h-screen overflow-hidden">
     <section class="bg-background flex flex-col gap-0">
-      <ServicesInteractive client:visible initialServices={allServices}/>
+      <ServicesInteractive client:visible initialServices={allServices} />
       <CTASection />
       <ProcessSection />
       <Faq />

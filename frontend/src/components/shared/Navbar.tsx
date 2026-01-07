@@ -7,7 +7,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
-import DisaFullLogo from "../assets/DisaFullLogo.svg?react";
+import DisaFullLogo from "../../assets/DisaFullLogo.svg?react";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
