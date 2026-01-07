@@ -21,10 +21,6 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             <span className="text-foreground group-data-[state=open]:text-primary">
               {item.question}
             </span>
-            <span className="p-2 rounded-full transition-colors bg-muted text-muted-foreground group-data-[state=open]:bg-primary/10 group-data-[state=open]:text-primary">
-              <Plus className="w-4 h-4 group-data-[state=open]:hidden" />
-              <Minus className="w-4 h-4 hidden group-data-[state=open]:block" />
-            </span>
           </AccordionTrigger>
           <AccordionContent className="px-6 pb-6 text-muted-foreground leading-relaxed">
             {item.answer}
