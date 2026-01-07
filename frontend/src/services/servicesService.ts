@@ -1,26 +1,35 @@
-import type { Service } from "../sanity/types/services";
-import {
-  allServicesQuery,
-  serviceByNumberQuery,
-  serviceByIdQuery,
-} from "../sanity/queries/services";
+import type {
+  ServicesCategory,
+  ServicesPackage,
+} from "../sanity/types/services";
+import { SERVICES_QUERY } from "../sanity/queries/services";
 import { loadQuery } from "../sanity/lib/load-query";
+import { string } from "astro:schema";
 
 /**
  * Mapea un documento crudo de Sanity al tipo de dominio `Service`.
  */
-function mapService(doc: any): Service {
+
+function mapServicePackage(doc: any): ServicesPackage {
   return {
-    id: doc._id,
-    number: doc.number,
-    icon: doc.icon,
+    name: doc.name,
+    price: doc.price,
+    tag: doc.tag,
+    features: doc.features,
+  };
+}
+
+function mapServicesCategory(doc: any): ServicesCategory {
+  const packages: ServicesPackage[] = doc.packages.map(mapServicePackage);
+  return {
+    id: doc.id,
     title: doc.title,
-    subtitle: doc.subtitle ?? undefined,
+    subtitle: doc.subtitle,
     description: doc.description,
-    features: doc.features ?? [],
-    gradientIndex: doc.gradientIndex ?? undefined,
-    gradientServicePage: doc.gradientServicePage ?? undefined,
-    accentColor: doc.accentColor ?? undefined,
+    icon: doc.icon,
+    color: doc.color,
+    gradient: doc.gradient,
+    packages,
   };
 }
 
@@ -28,64 +37,18 @@ function mapService(doc: any): Service {
  * Obtiene todos los servicios ordenados por `number`.
  */
 
-export async function getAllServices(): Promise<Service[]> {
+export async function getAllServices(): Promise<ServicesCategory[]> {
   try {
     const { data: docs } = await loadQuery<any[]>({
-      query: allServicesQuery,
+      query: SERVICES_QUERY,
     });
 
-    return (docs ?? []).map(mapService);
+    return (docs ?? []).map(mapServicesCategory);
   } catch (error) {
     console.error(
       "[servicesService] Error al obtener todos los servicios:",
       error
     );
     throw new Error("No se pudieron obtener los servicios");
-  }
-}
-
-/**
- * Obtiene un servicio por su campo `number`.
- * Devuelve `null` si no existe.
- */
-export async function getServiceByNumber(
-  number: number
-): Promise<Service | null> {
-  try {
-    const { data: doc } = await loadQuery<any>({
-      query: serviceByNumberQuery,
-      params: { number },
-    });
-
-    if (!doc) return null;
-    return mapService(doc);
-  } catch (error) {
-    console.error(
-      `[servicesService] Error al obtener el servicio con number=${number}:`,
-      error
-    );
-    throw new Error("No se pudo obtener el servicio.");
-  }
-}
-
-/**
- * Obtiene un servicio por `_id` interno de Sanity.
- * Devuelve `null` si no existe.
- */
-export async function getServiceById(id: string): Promise<Service | null> {
-  try {
-    const { data: doc } = await loadQuery<any>({
-      query: serviceByIdQuery,
-      params: { id },
-    });
-
-    if (!doc) return null;
-    return mapService(doc);
-  } catch (error) {
-    console.error(
-      `[servicesService] Error al obtener el servicio con id=${id}:`,
-      error
-    );
-    throw new Error("No se pudo obtener el servicio por id.");
   }
 }

@@ -7,13 +7,14 @@ import {
   useSpring,
 } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
-import DisaFullLogo from "../assets/DisaFullLogo.svg?react";
+import DisaFullLogo from "../../assets/DisaFullLogo.svg?react";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Servicios" },
+  { href: "/precios", label: "Precios" },
   { href: "/portafolio", label: "Portafolio" },
   { href: "/blog", label: "Blog" },
+  { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -72,7 +73,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-30 transition-all duration-500 ${
         isScrolled ? "py-4" : "py-6"
       }`}
     >
