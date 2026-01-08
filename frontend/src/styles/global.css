@@ -241,6 +241,7 @@ html {
     );
 
     --shadow-glow: 0 0 30px hsl(185 100% 50% / 0.3);
+    --shadow-glow-md: 0 0 40px hsl(185 100% 50% / 0.3);
     --shadow-glow-lg: 0 0 60px hsl(185 100% 50% / 0.4);
     --shadow-purple: 0 0 30px hsl(270 100% 65% / 0.3);
   }
@@ -268,24 +269,73 @@ html {
 
 /* 8. Utilidades personalizadas (tal cual venían de index.css) */
 @layer utilities {
-  .fade-top {
-    mask-image: linear-gradient(to bottom, transparent, black 15%);
+  .section-fade-top {
+    position: relative;
   }
 
-  .fade-bottom {
-    mask-image: linear-gradient(to top, transparent, black 15%);
+  .section-fade-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(
+      to bottom,
+      hsl(220 25% 6%) 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .fade-both {
+  .section-fade-bottom {
+    position: relative;
+  }
+
+  .section-fade-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, hsl(220 25% 6%) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .section-glow-blend {
+    position: relative;
+  }
+
+  .section-glow-blend::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 300px;
+    background: radial-gradient(
+      ellipse at center,
+      hsl(185 100% 50% / 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
     mask-image: linear-gradient(
       to bottom,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
+      transparent 0%,
+      black 50%,
+      black 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 50%,
+      black 100%
     );
   }
-
   .font-orbitron {
     font-family: var(--font-orbitron);
   }
@@ -398,6 +448,10 @@ html {
 
 @utility glow-primary {
   box-shadow: var(--shadow-glow);
+}
+
+@utility glow-primary-md {
+  box-shadow: var(--shadow-glow-md);
 }
 
 @utility glow-primary-lg {

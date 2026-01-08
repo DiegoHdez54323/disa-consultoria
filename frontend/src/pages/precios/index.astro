@@ -20,9 +20,10 @@ const allServices: ServicesCategory[] = await getAllServices();
   <main class="min-h-screen overflow-hidden">
     <section class="bg-background flex flex-col gap-0">
       <ServicesInteractive client:visible initialServices={allServices} />
-      <CTASection />
+
       <ProcessSection />
       <Faq />
+      <CTASection />
     </section>
   </main>
 </BaseLayout>
