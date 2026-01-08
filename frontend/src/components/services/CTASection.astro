@@ -3,40 +3,56 @@ import { Sparkles } from "lucide-astro";
 import { CTAActions } from "./CTAActions";
 ---
 
-<section class="relative py-24 md:py-32 overflow-hidden">
+<section class="relative py-24 md:py-32 overflow-hidden section-fade-top">
   <div class="container mx-auto px-6">
     <div class="relative max-w-5xl mx-auto">
-      
       {/* Efectos de fondo con el color PRIMARY de tu marca */}
-      <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 rounded-3xl blur-3xl opacity-50"></div>
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 rounded-3xl blur-3xl opacity-50"
+      >
+      </div>
+      <div
+        class="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"
+      >
+      </div>
+      <div
+        class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
+        style="animation-delay: 1s;"
+      >
+      </div>
 
       {/* Tarjeta Principal */}
-      <div class="relative bg-card/40 backdrop-blur-xl border border-primary/10 rounded-[2rem] p-10 md:p-16 text-center overflow-hidden shadow-2xl">
-        
+      <div
+        class="relative bg-card/40 backdrop-blur-xl border border-primary/10 rounded-[2rem] p-10 md:p-16 text-center overflow-hidden shadow-2xl"
+      >
         {/* Contenido */}
         <div class="relative z-10 mb-10">
-          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
+          <span
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20"
+          >
             <Sparkles class="w-4 h-4" />
             Da el siguiente paso
           </span>
-          
-          <h2 class="font-orbitron text-3xl md:text-5xl font-black text-foreground mb-6 leading-tight">
-            ¿Tienes un proyecto en mente? <br/>
+
+          <h2
+            class="font-orbitron text-3xl md:text-5xl font-black text-foreground mb-6 leading-tight"
+          >
+            ¿Tienes un proyecto en mente? <br />
             <span class="text-gradient-primary">Hagámoslo realidad.</span>
           </h2>
-          
-          <p class="font-inter text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            No te quedes con la duda. Agenda una sesión inicial gratuita y evaluemos juntos la viabilidad y el alcance de tu idea.
+
+          <p
+            class="font-inter text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          >
+            No te quedes con la duda. Agenda una sesión inicial gratuita y
+            evaluemos juntos la viabilidad y el alcance de tu idea.
           </p>
         </div>
 
         {/* Botones Interactivos */}
         <div class="relative z-10">
-            <CTAActions client:visible />
+          <CTAActions client:visible />
         </div>
-        
       </div>
     </div>
   </div>

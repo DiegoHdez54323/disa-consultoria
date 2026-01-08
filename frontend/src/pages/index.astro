@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { HeroSection } from "../components/index/HeroSection";
 import BlogSection from "../components/index/BlogSection.astro";
@@ -39,23 +40,6 @@ const schema = {
   schema={schema}
 >
   <div class="relative overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-      <div
-        class="absolute top-[5%] -left-[10%] w-[70%] h-[600px] bg-primary/10 blur-[130px] rounded-full"
-      >
-      </div>
-
-      <div
-        class="absolute top-[35%] -right-[10%] w-[70%] h-[700px] bg-secondary/10 blur-[130px] rounded-full"
-      >
-      </div>
-
-      <div
-        class="absolute top-[70%] -left-[10%] w-[70%] h-[600px] bg-accent/10 blur-[130px] rounded-full"
-      >
-      </div>
-    </div>
-
     <HeroSection client:load />
 
     <ServicesInteractive client:load initialServices={allServices} />

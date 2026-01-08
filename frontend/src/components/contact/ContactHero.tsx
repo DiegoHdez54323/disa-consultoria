@@ -15,7 +15,7 @@ export const ContactHero = () => {
   ];
 
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden">
+    <section className="relative pt-32 pb-20 overflow-hidden section-fade-bottom">
       {/* Animated background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-grid opacity-20" />
@@ -55,7 +55,7 @@ export const ContactHero = () => {
               Hablemos de tu
             </motion.h1>
           </div>
-          <div className="overflow-hidden mb-8">
+          <div className="mb-8">
             <motion.div
               initial={{ y: 100 }}
               animate={{ y: 0 }}

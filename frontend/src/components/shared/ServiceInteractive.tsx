@@ -21,13 +21,13 @@ export const ServicesInteractive = ({ initialServices }: Props) => {
   return (
     <>
       <section
-        className="py-24 pt-30 relative bg-background overflow-hidden"
+        className="py-24 pt-30 relative bg-background overflow-hidden section-fade-top section-fade-bottom"
         id="servicios"
       >
         {/* Background Effects (Sin cambios) */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <div className="absolute inset-0 w-full h-full pointer-events-none ">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-purple-500/5 to-primary/5 opacity-50" />
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse " />
           <div
             className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
             style={{ animationDelay: "1s" }}

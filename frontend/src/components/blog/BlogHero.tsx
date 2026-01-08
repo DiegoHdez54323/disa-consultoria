@@ -8,7 +8,7 @@ interface BlogHeroProps {
 
 const BlogHero: React.FC<BlogHeroProps> = ({ searchTerm, onSearchChange }) => {
   return (
-    <section className="relative pt-32 pb-16 overflow-hidden">
+    <section className="relative pt-32 pb-16 overflow-hidden section-fade-bottom">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
 
