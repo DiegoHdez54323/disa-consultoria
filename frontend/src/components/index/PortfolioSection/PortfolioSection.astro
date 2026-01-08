@@ -11,7 +11,9 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<section class="relative py-24 overflow-hidden">
+<section
+  class="relative py-24 section-fade-bottom overflow-hidden section-fade-top"
+>
   {/* Seamless Background */}
   <div class="absolute inset-0 bg-background"></div>
   <div class="absolute inset-0 bg-grid opacity-10"></div>

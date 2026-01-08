@@ -1,6 +1,12 @@
 // frontend/src/components/index/HeroSection.tsx
 import { motion } from "framer-motion";
-import { ArrowRight, TrendingUp, ShieldCheck, Zap, LayoutDashboard } from "lucide-react";
+import {
+  ArrowRight,
+  TrendingUp,
+  ShieldCheck,
+  Zap,
+  LayoutDashboard,
+} from "lucide-react";
 import { ParticleBackground } from "./ParticleBackground";
 
 const features = [
@@ -12,12 +18,12 @@ const features = [
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-fade-bottom">
       {/* Background Elements */}
       <ParticleBackground />
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow " />
       <div
         className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse-glow"
         style={{ animationDelay: "1s" }}
@@ -61,8 +67,12 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-inter text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10"
           >
-            Olvídate de los Excel gigantes. Desarrollamos tus <strong>CRMs, Sistemas de Control Operativo, Cotizadores y Dashboards</strong>. 
-            Herramientas diseñadas para pagarse solas con el tiempo que ahorras.
+            Olvídate de los Excel gigantes. Desarrollamos tus{" "}
+            <strong>
+              CRMs, Sistemas de Control Operativo, Cotizadores y Dashboards
+            </strong>
+            . Herramientas diseñadas para pagarse solas con el tiempo que
+            ahorras.
           </motion.p>
 
           {/* Feature badges */}
@@ -96,24 +106,24 @@ export const HeroSection = () => {
             className="flex flex-col items-center justify-center gap-4"
           >
             <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="/contacto"
-                  className="group relative px-8 py-4 rounded-full bg-gradient-primary text-primary-foreground font-inter font-semibold text-lg overflow-hidden transition-all duration-300 hover:glow-primary-lg"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Agenda una llamada GRATIS
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </a>
-                <a
-                  href="/portafolio"
-                  className="px-8 py-4 rounded-full border border-border/50 text-foreground font-inter font-semibold text-lg hover:bg-muted/30 hover:border-primary/30 transition-all duration-300"
-                >
-                  Ver Casos de Éxito
-                </a>
+              <a
+                href="/contacto"
+                className="group relative px-8 py-4 rounded-full bg-gradient-primary text-primary-foreground font-inter font-semibold text-lg overflow-hidden transition-all duration-300 hover:glow-primary-lg"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Agenda una llamada GRATIS
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </a>
+              <a
+                href="/portafolio"
+                className="px-8 py-4 rounded-full border border-border/50 text-foreground font-inter font-semibold text-lg hover:bg-muted/30 hover:border-primary/30 transition-all duration-300"
+              >
+                Ver Casos de Éxito
+              </a>
             </div>
             <p className="text-xs text-muted-foreground mt-2 opacity-80">
-                Sin compromiso. Recibe una estimación de inversión inicial.
+              Sin compromiso. Recibe una estimación de inversión inicial.
             </p>
           </motion.div>
         </div>
@@ -126,7 +136,9 @@ export const HeroSection = () => {
         transition={{ delay: 1, duration: 0.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
       >
-        <span className="text-xs font-inter text-muted-foreground">Descubre más</span>
+        <span className="text-xs font-inter text-muted-foreground">
+          Descubre más
+        </span>
         <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
           <motion.div
             animate={{ y: [0, 12, 0] }}

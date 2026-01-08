@@ -33,7 +33,7 @@ export const ServiceModal = ({
       case "Crecimiento":
         return {
           wrapper:
-            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z10 transform md:-translate-y-4",
+            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z10 transform md:-translate-y-6  animate-float ",
           badge:
             "bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/40",
           button:
@@ -105,7 +105,7 @@ export const ServiceModal = ({
         </div>
 
         <div className="p-6 md:p-10 overflow-y-auto bg-grid-white/[0.02]">
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 pt-6 pb-4 items-start">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 pt-6 pb-4 items-stretch">
             {/* Iteramos sobre los paquetes que vienen de Sanity */}
             {selectedCategory.packages &&
               selectedCategory.packages.map((pkg, idx) => {
@@ -113,10 +113,10 @@ export const ServiceModal = ({
                 return (
                   <div
                     key={idx}
-                    className={`relative flex flex-col p-8 rounded-[2rem] border transition-all duration-300 group ${styles.wrapper}`}
+                    className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
                   >
                     {pkg.tag === "Crecimiento" && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20">
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20">
                         Más Popular
                       </div>
                     )}
@@ -131,7 +131,9 @@ export const ServiceModal = ({
                         {pkg.name}
                       </h4>
                       <div
-                        className={`text-2xl md:text-3xl font-black ${styles.priceColor}`}
+                        className={`text-2xl md:text-3xl font-black text-center leading-tight
+                                    min-h-12 md:min-h-20 flex items-center justify-center
+                                    ${styles.priceColor}`}
                       >
                         {pkg.price}
                       </div>
@@ -140,9 +142,9 @@ export const ServiceModal = ({
                       </span>
                     </div>
 
-                    <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+                    <div className="w-full h-px bg-linear-to-r from-transparent via-border to-transparent mb-8" />
 
-                    <ul className="space-y-4 mb-10 flex-grow px-2">
+                    <ul className="space-y-4 mb-10 grow px-2">
                       {pkg.features.map((feat, i) => (
                         <li
                           key={i}
