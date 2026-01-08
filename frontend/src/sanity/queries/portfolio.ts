@@ -1,9 +1,11 @@
 import groq from "groq";
 
+// Agregamos "slug": slug.current en todas las consultas
 export const allPortfolioProjectsQuery = groq`
   *[_type == "portfolioType"] | order(_createdAt desc) {
     _id,
     title,
+    "slug": slug.current, 
     description,
     technologies,
     color,
@@ -29,7 +31,38 @@ export const portfolioProjectsByCategorySlugQuery = groq`
   ] | order(_createdAt desc) {
     _id,
     title,
+    "slug": slug.current,
     description,
+    technologies,
+    color,
+    image{
+      ...,
+      asset->
+    },
+    categories[]->{
+      _id,
+      title,
+      "slug": slug.current
+    },
+    gradient,
+    year,
+    link
+  }
+`;
+
+// Esta es la query nueva para la página de detalle
+export const portfolioProjectBySlugQuery = groq`
+  *[_type == "portfolioType" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    subtitle,
+    description,
+    challenge,
+    quote,
+    results,
+    process,
+    industries,
     technologies,
     color,
     image{
@@ -51,6 +84,7 @@ export const portfolioProjectByIdQuery = groq`
   *[_type == "portfolioType" && _id == $id][0] {
     _id,
     title,
+    "slug": slug.current,
     description,
     technologies,
     color,

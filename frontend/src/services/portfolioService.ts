@@ -6,6 +6,7 @@ import {
   allPortfolioProjectsQuery,
   portfolioProjectsByCategorySlugQuery,
   portfolioProjectByIdQuery,
+  portfolioProjectBySlugQuery, // Importamos la nueva query
 } from "../sanity/queries/portfolio";
 import { loadQuery } from "../sanity/lib/load-query";
 
@@ -21,7 +22,14 @@ function mapPortfolioProject(doc: any): PortfolioProject {
   return {
     id: doc._id,
     title: doc.title,
+    slug: doc.slug, // Mapeamos el slug
+    subtitle: doc.subtitle,
     description: doc.description,
+    challenge: doc.challenge,
+    quote: doc.quote,
+    results: doc.results,
+    process: doc.process,
+    industries: doc.industries,
     technologies: doc.technologies ?? [],
     image: {
       source: doc.image, 
@@ -51,6 +59,29 @@ export async function getAllPortfolioProjects(): Promise<PortfolioProject[]> {
       error
     );
     throw new Error("No se pudieron obtener los proyectos de portafolio.");
+  }
+}
+
+/**
+ * NUEVO: Obtiene un proyecto por su slug.
+ */
+export async function getPortfolioProjectBySlug(
+  slug: string
+): Promise<PortfolioProject | null> {
+  try {
+    const { data: doc } = await loadQuery<any>({
+      query: portfolioProjectBySlugQuery,
+      params: { slug },
+    });
+
+    if (!doc) return null;
+    return mapPortfolioProject(doc);
+  } catch (error) {
+    console.error(
+      `[portfolioService] Error al obtener proyecto de portafolio con slug=${slug}:`,
+      error
+    );
+    return null;
   }
 }
 
@@ -99,4 +130,4 @@ export async function getPortfolioProjectById(
     );
     throw new Error("No se pudo obtener el proyecto de portafolio.");
   }
-}
+}''
