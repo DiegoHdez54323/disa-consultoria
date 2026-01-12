@@ -6,7 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AuroraText } from "@/components/ui/aurora-text";
 import type { ServicesCategory } from "@/sanity/types/services";
 // Asegúrate de que la ruta coincida con donde guardaste el componente
-import { RedesignModalContent } from "./RedisingModalComponent"; 
+import { RedesignModalContent } from "./RedisingModalComponent";
 
 interface ServiceModalProps {
   selectedCategory: ServicesCategory;
@@ -132,13 +132,16 @@ export const ServiceModal = ({
                       key={group.groupName}
                       value={group.groupName}
                       className="
-                        font-orbitron px-4 py-2 rounded-full border border-transparent
-                        data-[state=active]:bg-white/10 data-[state=active]:border-white/10
-                        transition-all duration-300
+                        font-orbitron
+                        bg-transparent shadow-transparent
+                        data-[state=active]:bg-transparent data-[state=active]:shadow-transparent
                       "
                     >
                       {activeGroup === group.groupName ? (
-                        <AuroraText speed={1.5} className="font-orbitron font-bold">
+                        <AuroraText
+                          speed={1.5}
+                          className="font-orbitron font-bold"
+                        >
                           {group.groupName}
                         </AuroraText>
                       ) : (
@@ -222,16 +225,16 @@ export const ServiceModal = ({
                     );
                   })}
                 </div>
+                {/* === INTEGRACIÓN DEL CTA ENVOLVENTE (RedesignModalContent) === */}
+                {/* Añadimos un margen superior para separarlo de las tarjetas de precios */}
+                {group.groupName === "Rediseño web" && (
+                  <div className="w-full">
+                    <RedesignModalContent />
+                  </div>
+                )}
               </TabsContent>
             ))}
           </Tabs>
-
-          {/* === INTEGRACIÓN DEL CTA ENVOLVENTE (RedesignModalContent) === */}
-          {/* Añadimos un margen superior para separarlo de las tarjetas de precios */}
-          <div className="mt-12 md:mt-16 w-full">
-            <RedesignModalContent />
-          </div>
-
         </div>
 
         {/* Footer del Modal */}
