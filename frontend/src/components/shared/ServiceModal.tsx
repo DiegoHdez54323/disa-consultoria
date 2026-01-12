@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { X, Check, ArrowRight, HelpCircle } from "lucide-react";
-
 import * as LucideIcons from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { AuroraText } from "@/components/ui/aurora-text";
 import type { ServicesCategory } from "@/sanity/types/services";
 
 interface ServiceModalProps {
@@ -15,9 +16,17 @@ export const ServiceModal = ({
   onClose,
 }: ServiceModalProps) => {
   const [showQuoteInfo, setShowQuoteInfo] = useState(false);
+  const groups = selectedCategory.packageGroups ?? [];
+  const hasMultipleGroups = groups.length > 1;
+  const initialGroup = groups[0]?.groupName ?? "";
+  const [activeGroup, setActiveGroup] = useState(initialGroup);
 
   const IconComponent =
     (LucideIcons as any)[selectedCategory.icon] || HelpCircle;
+
+  useEffect(() => {
+    setActiveGroup(groups[0]?.groupName ?? "");
+  }, [selectedCategory]);
 
   const getPackageStyles = (tag: string) => {
     switch (tag) {
@@ -33,7 +42,7 @@ export const ServiceModal = ({
       case "Crecimiento":
         return {
           wrapper:
-            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z10 transform md:-translate-y-6  animate-float ",
+            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z10 transform  ",
           badge:
             "bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/40",
           button:
@@ -104,75 +113,114 @@ export const ServiceModal = ({
           </button>
         </div>
 
-        <div className="p-6 md:p-10 overflow-y-auto bg-grid-white/[0.02]">
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 pt-6 pb-4 items-stretch">
-            {/* Iteramos sobre los paquetes que vienen de Sanity */}
-            {selectedCategory.packages &&
-              selectedCategory.packages.map((pkg, idx) => {
-                const styles = getPackageStyles(pkg.tag);
-                return (
-                  <div
-                    key={idx}
-                    className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
-                  >
-                    {pkg.tag === "Crecimiento" && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20">
-                        Más Popular
-                      </div>
-                    )}
+        <div className="p-6 md:px-10 overflow-y-auto bg-grid/50">
+          <Tabs
+            defaultValue={initialGroup}
+            value={activeGroup}
+            onValueChange={setActiveGroup}
+            className="w-full "
+          >
+            {hasMultipleGroups && (
+              <div className="flex justify-center pb-10 md:pb-2">
+                <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent">
+                  {groups.map((group) => (
+                    <TabsTrigger
+                      key={group.groupName}
+                      value={group.groupName}
+                      className="
+                        font-orbitron
+                        bg-transparent shadow-transparent
+                        data-[state=active]:bg-transparent data-[state=active]:shadow-transparent
+                      "
+                    >
+                      {activeGroup === group.groupName ? (
+                        <AuroraText speed={1.5} className="font-orbitron">
+                          {group.groupName}
+                        </AuroraText>
+                      ) : (
+                        <span className="text-muted-foreground">
+                          {group.groupName}
+                        </span>
+                      )}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+            )}
 
-                    <div className="mb-8 text-center">
-                      <span
-                        className={`inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg mb-4 ${styles.badge}`}
-                      >
-                        {pkg.tag}
-                      </span>
-                      <h4 className="font-orbitron text-xl font-bold text-foreground mb-4">
-                        {pkg.name}
-                      </h4>
+            {groups.map((group) => (
+              <TabsContent
+                key={group.groupName}
+                value={group.groupName}
+                className="pt-6"
+              >
+                <div className="grid md:grid-cols-3 gap-6 md:gap-6 pb-4 items-stretch">
+                  {group.packages.map((pkg, idx) => {
+                    const styles = getPackageStyles(pkg.tag);
+                    return (
                       <div
-                        className={`text-2xl md:text-3xl font-black text-center leading-tight
+                        key={idx}
+                        className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
+                      >
+                        {pkg.tag === "Crecimiento" && (
+                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20">
+                            Más Popular
+                          </div>
+                        )}
+
+                        <div className="mb-8 text-center">
+                          <span
+                            className={`inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg mb-4 ${styles.badge}`}
+                          >
+                            {pkg.tag}
+                          </span>
+                          <h4 className="font-orbitron text-xl font-bold text-foreground mb-4">
+                            {pkg.name}
+                          </h4>
+                          <div
+                            className={`text-2xl md:text-3xl font-black text-center leading-tight
                                     min-h-12 md:min-h-20 flex items-center justify-center
                                     ${styles.priceColor}`}
-                      >
-                        {pkg.price}
-                      </div>
-                      <span className="text-xs text-muted-foreground font-medium mt-1 block">
-                        MXN + IVA (Estimado)
-                      </span>
-                    </div>
-
-                    <div className="w-full h-px bg-linear-to-r from-transparent via-border to-transparent mb-8" />
-
-                    <ul className="space-y-4 mb-10 grow px-2">
-                      {pkg.features.map((feat, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-3 text-sm text-muted-foreground"
-                        >
-                          <div
-                            className={`mt-0.5 shrink-0 ${styles.featureIcon}`}
                           >
-                            <Check className="w-4 h-4" />
+                            {pkg.price}
                           </div>
-                          <span className="leading-snug">{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                          <span className="text-xs text-muted-foreground font-medium mt-1 block">
+                            MXN + IVA (Estimado)
+                          </span>
+                        </div>
 
-                    <a
-                      href={`/contacto?servicio=${encodeURIComponent(
-                        selectedCategory.title
-                      )}&paquete=${encodeURIComponent(pkg.name)}`}
-                      className={`w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wide transition-all transform active:scale-95 text-center flex items-center justify-center gap-2 ${styles.button}`}
-                    >
-                      Cotizar Ahora
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                );
-              })}
-          </div>
+                        <div className="w-full h-px bg-linear-to-r from-transparent via-border to-transparent mb-8" />
+
+                        <ul className="space-y-4 mb-10 grow px-2">
+                          {pkg.features.map((feat, i) => (
+                            <li
+                              key={i}
+                              className="flex items-start gap-3 text-sm text-muted-foreground"
+                            >
+                              <div
+                                className={`mt-0.5 shrink-0 ${styles.featureIcon}`}
+                              >
+                                <Check className="w-4 h-4" />
+                              </div>
+                              <span className="leading-snug">{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <a
+                          href="/contacto"
+                          className={`w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wide transition-all transform active:scale-95 text-center flex items-center justify-center gap-2 ${styles.button}`}
+                        >
+                          Cotizar Ahora
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    );
+                  })}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
 
         {/* Footer del Modal */}

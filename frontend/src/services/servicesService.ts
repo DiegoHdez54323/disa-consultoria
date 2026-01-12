@@ -1,10 +1,10 @@
 import type {
   ServicesCategory,
   ServicesPackage,
+  ServicesPackageGroup,
 } from "../sanity/types/services";
 import { SERVICES_QUERY } from "../sanity/queries/services";
 import { loadQuery } from "../sanity/lib/load-query";
-import { string } from "astro:schema";
 
 /**
  * Mapea un documento crudo de Sanity al tipo de dominio `Service`.
@@ -19,8 +19,32 @@ function mapServicePackage(doc: any): ServicesPackage {
   };
 }
 
+function mapServicePackageGroup(doc: any): ServicesPackageGroup {
+  return {
+    groupName: doc.groupName,
+    packages: (doc.packages ?? []).map(mapServicePackage),
+  };
+}
+
 function mapServicesCategory(doc: any): ServicesCategory {
-  const packages: ServicesPackage[] = doc.packages.map(mapServicePackage);
+  const packages: ServicesPackage[] = (doc.packages ?? []).map(
+    mapServicePackage
+  );
+  const packageGroups: ServicesPackageGroup[] = (doc.packageGroups ?? []).map(
+    mapServicePackageGroup
+  );
+  const resolvedPackageGroups =
+    packageGroups.length > 0
+      ? packageGroups
+      : packages.length > 0
+        ? [
+            {
+              groupName: "Paquetes",
+              groupDescription: undefined,
+              packages,
+            },
+          ]
+        : [];
   return {
     id: doc.id,
     title: doc.title,
@@ -29,7 +53,8 @@ function mapServicesCategory(doc: any): ServicesCategory {
     icon: doc.icon,
     color: doc.color,
     gradient: doc.gradient,
-    packages,
+    packageGroups: resolvedPackageGroups,
+    packages: packages.length > 0 ? packages : undefined,
   };
 }
 
