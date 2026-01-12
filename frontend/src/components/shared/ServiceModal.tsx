@@ -5,6 +5,8 @@ import * as LucideIcons from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AuroraText } from "@/components/ui/aurora-text";
 import type { ServicesCategory } from "@/sanity/types/services";
+// Asegúrate de que la ruta coincida con donde guardaste el componente
+import { RedesignModalContent } from "./RedisingModalComponent"; 
 
 interface ServiceModalProps {
   selectedCategory: ServicesCategory;
@@ -21,6 +23,7 @@ export const ServiceModal = ({
   const initialGroup = groups[0]?.groupName ?? "";
   const [activeGroup, setActiveGroup] = useState(initialGroup);
 
+  // Fallback seguro para el icono
   const IconComponent =
     (LucideIcons as any)[selectedCategory.icon] || HelpCircle;
 
@@ -32,7 +35,7 @@ export const ServiceModal = ({
     switch (tag) {
       case "Esencial":
         return {
-          wrapper: "border-white/10 bg-white/5 hover:boder-white/20",
+          wrapper: "border-white/10 bg-white/5 hover:border-white/20",
           badge: "bg-gray-800 text-gray-300",
           button:
             "bg-white/10 text-white hover:bg-white/20 border border-white/10",
@@ -42,11 +45,11 @@ export const ServiceModal = ({
       case "Crecimiento":
         return {
           wrapper:
-            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z10 transform  ",
+            "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/20 relative z-10",
           badge:
             "bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/40",
           button:
-            "bg-gradient-primary text-primary-foreground hove:glow-primary shadow-lg shadow-primary/20",
+            "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:brightness-110 shadow-lg shadow-primary/20",
           priceColor: "text-primary",
           featureIcon: "text-primary",
         };
@@ -62,17 +65,17 @@ export const ServiceModal = ({
         };
       default:
         return {
-          wrapper: "",
-          badge: "",
-          button: "",
-          priceColor: "",
-          featureIcon: "",
+          wrapper: "border-white/10 bg-white/5",
+          badge: "bg-gray-800 text-gray-300",
+          button: "bg-white/10 text-white",
+          priceColor: "text-white",
+          featureIcon: "text-gray-500",
         };
     }
   };
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       {/* Backdrop (Fondo oscuro borroso) */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -107,38 +110,39 @@ export const ServiceModal = ({
           </div>
           <button
             onClick={onClose}
-            className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors border border-white/5"
+            className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors border border-white/5 cursor-pointer"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
 
-        <div className="p-6 md:px-10 overflow-y-auto bg-grid/50">
+        {/* Scrollable Content Area */}
+        <div className="p-6 md:px-10 overflow-y-auto bg-grid/50 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           <Tabs
             defaultValue={initialGroup}
             value={activeGroup}
             onValueChange={setActiveGroup}
-            className="w-full "
+            className="w-full"
           >
             {hasMultipleGroups && (
-              <div className="flex justify-center pb-10 md:pb-2">
-                <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent">
+              <div className="flex justify-center pb-10 md:pb-6">
+                <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent h-auto p-1">
                   {groups.map((group) => (
                     <TabsTrigger
                       key={group.groupName}
                       value={group.groupName}
                       className="
-                        font-orbitron
-                        bg-transparent shadow-transparent
-                        data-[state=active]:bg-transparent data-[state=active]:shadow-transparent
+                        font-orbitron px-4 py-2 rounded-full border border-transparent
+                        data-[state=active]:bg-white/10 data-[state=active]:border-white/10
+                        transition-all duration-300
                       "
                     >
                       {activeGroup === group.groupName ? (
-                        <AuroraText speed={1.5} className="font-orbitron">
+                        <AuroraText speed={1.5} className="font-orbitron font-bold">
                           {group.groupName}
                         </AuroraText>
                       ) : (
-                        <span className="text-muted-foreground">
+                        <span className="text-muted-foreground hover:text-white transition-colors">
                           {group.groupName}
                         </span>
                       )}
@@ -152,18 +156,18 @@ export const ServiceModal = ({
               <TabsContent
                 key={group.groupName}
                 value={group.groupName}
-                className="pt-6"
+                className="mt-0 focus-visible:outline-none"
               >
-                <div className="grid md:grid-cols-3 gap-6 md:gap-6 pb-4 items-stretch">
+                <div className="grid md:grid-cols-3 gap-6 md:gap-8 pb-8 items-stretch">
                   {group.packages.map((pkg, idx) => {
                     const styles = getPackageStyles(pkg.tag);
                     return (
                       <div
                         key={idx}
-                        className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
+                        className={`relative h-full flex flex-col p-8 rounded-[2rem] border transition-all duration-300 group ${styles.wrapper}`}
                       >
                         {pkg.tag === "Crecimiento" && (
-                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20">
+                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20 border border-white/20">
                             Más Popular
                           </div>
                         )}
@@ -179,7 +183,7 @@ export const ServiceModal = ({
                           </h4>
                           <div
                             className={`text-2xl md:text-3xl font-black text-center leading-tight
-                                    min-h-12 md:min-h-20 flex items-center justify-center
+                                    min-h-[3rem] md:min-h-[5rem] flex items-center justify-center
                                     ${styles.priceColor}`}
                           >
                             {pkg.price}
@@ -189,16 +193,16 @@ export const ServiceModal = ({
                           </span>
                         </div>
 
-                        <div className="w-full h-px bg-linear-to-r from-transparent via-border to-transparent mb-8" />
+                        <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8 opacity-50" />
 
                         <ul className="space-y-4 mb-10 grow px-2">
                           {pkg.features.map((feat, i) => (
                             <li
                               key={i}
-                              className="flex items-start gap-3 text-sm text-muted-foreground"
+                              className="flex items-start gap-3 text-sm text-muted-foreground group-hover:text-slate-300 transition-colors"
                             >
                               <div
-                                className={`mt-0.5 shrink-0 ${styles.featureIcon}`}
+                                className={`mt-0.5 shrink-0 transition-colors ${styles.featureIcon}`}
                               >
                                 <Check className="w-4 h-4" />
                               </div>
@@ -221,10 +225,17 @@ export const ServiceModal = ({
               </TabsContent>
             ))}
           </Tabs>
+
+          {/* === INTEGRACIÓN DEL CTA ENVOLVENTE (RedesignModalContent) === */}
+          {/* Añadimos un margen superior para separarlo de las tarjetas de precios */}
+          <div className="mt-12 md:mt-16 w-full">
+            <RedesignModalContent />
+          </div>
+
         </div>
 
         {/* Footer del Modal */}
-        <div className="shrink-0 p-6 bg-card border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
+        <div className="shrink-0 p-6 bg-card border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 z-20 relative">
           <div className="flex items-center gap-2 relative group">
             <HelpCircle className="w-4 h-4 text-muted-foreground" />
             <button
@@ -238,7 +249,7 @@ export const ServiceModal = ({
             </button>
 
             {showQuoteInfo && (
-              <div className="absolute bottom-full left-0 mb-4 w-72 p-5 bg-popover border border-border rounded-xl shadow-2xl z-50 text-left">
+              <div className="absolute bottom-full left-0 mb-4 w-72 p-5 bg-popover/95 backdrop-blur border border-white/10 rounded-xl shadow-2xl z-50 text-left">
                 <h6 className="font-bold text-foreground text-xs mb-3 uppercase tracking-wider">
                   Modelo DiSa
                 </h6>
