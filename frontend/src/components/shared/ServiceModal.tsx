@@ -5,8 +5,12 @@ import * as LucideIcons from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AuroraText } from "@/components/ui/aurora-text";
 import type { ServicesCategory } from "@/sanity/types/services";
-// Asegúrate de que la ruta coincida con donde guardaste el componente
+import { CustomIdeaCtaReact } from "../services/CTACustomIdea";
+
+// Componentes personalizados
 import { RedesignModalContent } from "./RedisingModalComponent";
+import { EnterpriseCtaReact } from "../services/CTAEnterprise";
+import { array } from "astro:schema";
 
 interface ServiceModalProps {
   selectedCategory: ServicesCategory;
@@ -30,6 +34,8 @@ export const ServiceModal = ({
   useEffect(() => {
     setActiveGroup(groups[0]?.groupName ?? "");
   }, [selectedCategory]);
+
+  const CtaCustomPages = new Set(["Rediseño web", "Sistemas Enterprise"]);
 
   const getPackageStyles = (tag: string) => {
     switch (tag) {
@@ -167,10 +173,10 @@ export const ServiceModal = ({
                     return (
                       <div
                         key={idx}
-                        className={`relative h-full flex flex-col p-8 rounded-[2rem] border transition-all duration-300 group ${styles.wrapper}`}
+                        className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
                       >
                         {pkg.tag === "Crecimiento" && (
-                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20 border border-white/20">
+                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20 border border-white/20">
                             Más Popular
                           </div>
                         )}
@@ -186,8 +192,8 @@ export const ServiceModal = ({
                           </h4>
                           <div
                             className={`text-2xl md:text-3xl font-black text-center leading-tight
-                                    min-h-[3rem] md:min-h-[5rem] flex items-center justify-center
-                                    ${styles.priceColor}`}
+                                        min-h-12 md:min-h-20 flex items-center justify-center
+                                        ${styles.priceColor}`}
                           >
                             {pkg.price}
                           </div>
@@ -196,7 +202,7 @@ export const ServiceModal = ({
                           </span>
                         </div>
 
-                        <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8 opacity-50" />
+                        <div className="w-full h-px bg-linear-to-r from-transparent via-border to-transparent mb-8 opacity-50" />
 
                         <ul className="space-y-4 mb-10 grow px-2">
                           {pkg.features.map((feat, i) => (
@@ -221,17 +227,31 @@ export const ServiceModal = ({
                           Cotizar Ahora
                           <ArrowRight className="w-4 h-4" />
                         </a>
+
                       </div>
+
                     );
                   })}
+
                 </div>
-                {/* === INTEGRACIÓN DEL CTA ENVOLVENTE (RedesignModalContent) === */}
-                {/* Añadimos un margen superior para separarlo de las tarjetas de precios */}
+
+                {/* Mantenemos tu lógica existente para Rediseño Web si aplica */}
                 {group.groupName === "Rediseño web" && (
                   <div className="w-full">
                     <RedesignModalContent />
                   </div>
                 )}
+                {group.groupName === "Sistemas Enterprise" && (
+                  <div className="w-full">
+                    < EnterpriseCtaReact />
+                  </div>
+                )}
+                {!CtaCustomPages.has(group.groupName) && (
+                  <div className="w-full">
+                    < CustomIdeaCtaReact />
+                  </div>
+                )}
+
               </TabsContent>
             ))}
           </Tabs>
