@@ -10,7 +10,6 @@ import { CustomIdeaCtaReact } from "../services/CTACustomIdea";
 // Componentes personalizados
 import { RedesignModalContent } from "./RedisingModalComponent";
 import { EnterpriseCtaReact } from "../services/CTAEnterprise";
-import { array } from "astro:schema";
 
 interface ServiceModalProps {
   selectedCategory: ServicesCategory;
@@ -35,7 +34,7 @@ export const ServiceModal = ({
     setActiveGroup(groups[0]?.groupName ?? "");
   }, [selectedCategory]);
 
-  const CtaCustomPages = new Set(["Rediseño web", "Sistemas Enterprise"]);
+  const ctaCustomPages = new Set(["Rediseño web", "Sistemas Enterprise"]);
 
   const getPackageStyles = (tag: string) => {
     switch (tag) {
@@ -94,7 +93,7 @@ export const ServiceModal = ({
       {/* Tarjeta del Modal */}
       <motion.div
         layoutId={`card-container-${selectedCategory.id}`}
-        className="relative w-full max-w-7xl max-h-[95vh] bg-card border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col z-10"
+        className="relative w-full max-w-[165vh] max-h-[95vh] bg-card border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col z-10"
       >
         {/* Header */}
         <div className="relative shrink-0 p-8 md:p-10 border-b border-white/5 bg-card/95 backdrop-blur z-20 flex items-center justify-between">
@@ -132,7 +131,7 @@ export const ServiceModal = ({
           >
             {hasMultipleGroups && (
               <div className="flex justify-center pb-10 md:pb-6">
-                <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent h-auto p-1">
+                <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent  p-1">
                   {groups.map((group) => (
                     <TabsTrigger
                       key={group.groupName}
@@ -167,13 +166,28 @@ export const ServiceModal = ({
                 value={group.groupName}
                 className="mt-0 focus-visible:outline-none"
               >
-                <div className="grid md:grid-cols-3 gap-6 md:gap-8 pb-8 items-stretch">
+                <div
+                  className="
+                    grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3
+                    gap-4 sm:gap-6 xl:gap-8 mb-8
+                    items-stretch
+
+                    sm:[&>*:last-child:nth-child(odd)]:col-span-2
+                    sm:[&>*:last-child:nth-child(odd)]:justify-self-center
+                    sm:[&>*:last-child:nth-child(odd)]:w-full
+                    sm:[&>*:last-child:nth-child(odd)]:max-w-[520px]
+
+                    xl:[&>*:last-child:nth-child(odd)]:col-span-1
+                    xl:[&>*:last-child:nth-child(odd)]:justify-self-auto
+                    xl:[&>*:last-child:nth-child(odd)]:max-w-none
+                    "
+                >
                   {group.packages.map((pkg, idx) => {
                     const styles = getPackageStyles(pkg.tag);
                     return (
                       <div
                         key={idx}
-                        className={`relative h-full flex flex-col p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
+                        className={`relative h-full flex flex-col p-6 sm:p-7 lg:p-8 rounded-4xl border transition-all duration-300 group ${styles.wrapper}`}
                       >
                         {pkg.tag === "Crecimiento" && (
                           <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg shadow-primary/30 z-20 border border-white/20">
@@ -191,8 +205,8 @@ export const ServiceModal = ({
                             {pkg.name}
                           </h4>
                           <div
-                            className={`text-2xl md:text-3xl font-black text-center leading-tight
-                                        min-h-12 md:min-h-20 flex items-center justify-center
+                            className={`text-2xl md:text-3xl font-black wrap-break-words text-center leading-tight
+                                        min-h-14 sm:min-h-16 md:min-h-20 flex items-center justify-center
                                         ${styles.priceColor}`}
                           >
                             {pkg.price}
@@ -227,31 +241,27 @@ export const ServiceModal = ({
                           Cotizar Ahora
                           <ArrowRight className="w-4 h-4" />
                         </a>
-
                       </div>
-
                     );
                   })}
-
                 </div>
 
-                {/* Mantenemos tu lógica existente para Rediseño Web si aplica */}
                 {group.groupName === "Rediseño web" && (
-                  <div className="w-full">
+                  <div className="w-full -mt-10">
                     <RedesignModalContent />
                   </div>
                 )}
                 {group.groupName === "Sistemas Enterprise" && (
-                  <div className="w-full">
-                    < EnterpriseCtaReact />
-                  </div>
-                )}
-                {!CtaCustomPages.has(group.groupName) && (
-                  <div className="w-full">
-                    < CustomIdeaCtaReact />
+                  <div className="w-full -mt-2">
+                    <EnterpriseCtaReact />
                   </div>
                 )}
 
+                {!ctaCustomPages.has(group.groupName) && (
+                  <div className="w-full">
+                    <CustomIdeaCtaReact />
+                  </div>
+                )}
               </TabsContent>
             ))}
           </Tabs>
