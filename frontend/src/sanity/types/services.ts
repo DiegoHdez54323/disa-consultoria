@@ -5,6 +5,11 @@ export type ServicesPackage = {
   features: string[];
 };
 
+export type ServicesPackageGroup = {
+  groupName: string;
+  packages: ServicesPackage[];
+};
+
 export type ServicesCategory = {
   id: string;
   title: string;
@@ -13,5 +18,6 @@ export type ServicesCategory = {
   icon: string;
   color: string;
   gradient: string;
-  packages: ServicesPackage[];
+  packageGroups: ServicesPackageGroup[];
+  packages?: ServicesPackage[];
 };

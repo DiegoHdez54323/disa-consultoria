@@ -1,5 +1,4 @@
-import { defineType, defineField, defineArrayMember } from "sanity";
-import { defineCliConfig } from "sanity/cli";
+import {defineType, defineField, defineArrayMember} from 'sanity'
 
 export const servicesType = defineType({
   name: 'servicesType',
@@ -54,21 +53,129 @@ export const servicesType = defineType({
       name: 'color',
       title: 'Color Base (Tailwind)',
       type: 'string',
-      description: 'Clase para el color del texto/icono. ',
+      description: 'Clase para el color del texto/icono.',
     }),
 
     defineField({
       name: 'gradient',
       title: 'Gradiente (Tailwind)',
       type: 'string',
-      description: 'Clases para el fondo/gradiente'
+      description: 'Clases para el fondo/gradiente',
     }),
 
+    /**
+     * NUEVO Grupos de paquetes
+     */
+    defineField({
+      name: 'packageGroups',
+      title: 'Grupos de Paquetes',
+      type: 'array',
+      description:
+        'Cada grupo es un tipo de entrega dentro del servicio (ej: Landing Page) y contiene 3 paquetes.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'packageGroup',
+          title: 'Grupo',
+          fields: [
+            defineField({
+              name: 'groupName',
+              title: 'Nombre del grupo',
+              type: 'string',
+              description: 'Ej: Landing Page / Página web completa / MVP Web',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'groupDescription',
+              title: 'Descripción del grupo (opcional)',
+              type: 'text',
+              rows: 2,
+              description: 'Contexto breve para este grupo.',
+            }),
+            defineField({
+              name: 'packages',
+              title: 'Paquetes de precios (3 niveles)',
+              type: 'array',
+              description: 'Define los 3 niveles: Esencial, Crecimiento, Pro',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  name: 'package',
+                  title: 'Paquete',
+                  fields: [
+                    defineField({
+                      name: 'name',
+                      title: 'Nombre del Plan',
+                      type: 'string',
+                      description: 'Ej. Automatización puntual',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'price',
+                      title: 'Rango de Precio',
+                      type: 'string',
+                      description: 'Costo aproximado del paquete',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'tag',
+                      title: 'Etiqueta de Nivel',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                      options: {
+                        list: [
+                          {title: 'Esencial', value: 'Esencial'},
+                          {title: 'Crecimiento', value: 'Crecimiento'},
+                          {title: 'Pro', value: 'Pro'},
+                        ],
+                        layout: 'radio',
+                      },
+                    }),
+                    defineField({
+                      name: 'features',
+                      title: 'Caracteristicas (Features)',
+                      type: 'array',
+                      of: [{type: 'string'}],
+                      description: 'Lista de puntos clave que incluye este paquete.',
+                      validation: (Rule) => Rule.min(1),
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      title: 'name',
+                      subtitle: 'price',
+                      tag: 'tag',
+                    },
+                    prepare({title, subtitle, tag}) {
+                      return {
+                        title: `${tag}: ${title}`,
+                        subtitle,
+                      }
+                    },
+                  },
+                }),
+              ],
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'groupName',
+              subtitle: 'groupDescription',
+            },
+          },
+        }),
+      ],
+    }),
+
+    /**
+     * LEGACY
+     */
     defineField({
       name: 'packages',
-      title: 'Paquetes de Precios',
+      title: 'Paquetes de Precios (DEPRECATED)',
       type: 'array',
-      description: 'Define los 3 niveles: Esencial, Crecimiento, Pro',
+      hidden: false, // cámbialo a false si quieres verlo mientras migras
+      description: 'Campo viejo',
       of: [
         defineArrayMember({
           type: 'object',
@@ -79,13 +186,11 @@ export const servicesType = defineType({
               name: 'name',
               title: 'Nombre del Plan',
               type: 'string',
-              description: 'Ej. Administracion puntual',
             }),
             defineField({
               name: 'price',
               title: 'Rango de Precio',
               type: 'string',
-              description: 'Costo aproximado del paquete'
             }),
             defineField({
               name: 'tag',
@@ -97,32 +202,18 @@ export const servicesType = defineType({
                   {title: 'Crecimiento', value: 'Crecimiento'},
                   {title: 'Pro', value: 'Pro'},
                 ],
-                layout: 'radio'
-              }
+                layout: 'radio',
+              },
             }),
             defineField({
               name: 'features',
               title: 'Caracteristicas (Features)',
               type: 'array',
               of: [{type: 'string'}],
-              description: 'Lista de puntos clave que incluye este paquete.',
             }),
           ],
-          preview: {
-            select: {
-              title: 'name',
-              subtitle: 'price',
-              tag: 'tag'
-            },
-            prepare({title, subtitle, tag}) {
-              return {
-                title: `${tag}: ${title}`,
-                subtitle: subtitle
-              }
-            }
-          }
-        })
-      ]
-    })
-  ]
+        }),
+      ],
+    }),
+  ],
 })

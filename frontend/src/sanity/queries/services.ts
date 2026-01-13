@@ -10,6 +10,15 @@ export const SERVICES_QUERY = groq`
     icon,
     color,
     gradient,
+    packageGroups[]{
+      groupName,
+      packages[]{
+        name,
+        price,
+        tag,
+        features
+      }
+    },
     packages[]{
       name,
       price,
