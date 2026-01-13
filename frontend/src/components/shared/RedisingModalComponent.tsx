@@ -85,7 +85,7 @@ export const RedesignModalContent = () => {
             </div>
 
             {/* Beneficio 3: Full Mobile (Ancho completo) */}
-            <div className="col-span-2 p-5 rounded-3xl bg-gradient-to-r from-white/5 to-transparent border border-white/10 hover:border-purple-500/30 transition-all duration-300 group/card flex items-center gap-4">
+            <div className="col-span-2 p-5 rounded-3xl bg-linear-to-r from-white/5 to-transparent border border-white/10 hover:border-purple-500/30 transition-all duration-300 group/card flex items-center gap-4">
               <div className="shrink-0 p-3 rounded-2xl bg-purple-500/10 text-purple-400 group-hover/card:rotate-12 transition-transform">
                 <Smartphone className="w-6 h-6" />
               </div>

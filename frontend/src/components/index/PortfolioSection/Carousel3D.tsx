@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProjectCard } from "./ProjectCard";
 import type { PortfolioProject } from "../../../sanity/types/portfolio";
+import { ProjectCard } from "./ProjectCard";
 
 interface Carousel3DProps {
   projects: PortfolioProject[];
@@ -77,6 +77,7 @@ export const Carousel3D = ({
   const visibleItems = getVisibleItems();
 
   return (
+
     <div className="relative w-full">
       {/* Carousel Container */}
       <div
@@ -130,10 +131,9 @@ export const Carousel3D = ({
                 <motion.div
                   className={`
                     transition-all duration-500 
-                    ${
-                      position === "center"
-                        ? "glow-primary-md rounded-2xl "
-                        : "pointer-events-none md:pointer-events-none"
+                    ${position === "center"
+                      ? "glow-primary-md rounded-2xl "
+                      : "pointer-events-none md:pointer-events-none"
                     }
                   `}
                   whileHover={position === "center" ? { scale: 1.02 } : {}}
@@ -172,10 +172,9 @@ export const Carousel3D = ({
             className={`
               cursor-pointer
               relative h-2 rounded-full transition-all duration-300 overflow-hidden
-              ${
-                index === currentIndex
-                  ? "w-8 bg-primary"
-                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              ${index === currentIndex
+                ? "w-8 bg-primary"
+                : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
               }
             `}
             aria-label={`Ir al proyecto ${index + 1}`}
