@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { ParticleBackground } from "./ParticleBackground";
+import { SparklesCore } from "../ui/sparkles";
 
 const features = [
   { icon: TrendingUp, text: "Rentabilidad" },
@@ -20,7 +21,16 @@ export const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-fade-bottom">
       {/* Background Elements */}
-      <ParticleBackground />
+
+      <SparklesCore
+        id="tsparticlesfullpage"
+        background="transparent"
+        minSize={0.6}
+        maxSize={1.4}
+        particleDensity={60}
+        className="absolute inset-0 pointer-events-none"
+        particleColor="#165573"
+      />
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow " />
