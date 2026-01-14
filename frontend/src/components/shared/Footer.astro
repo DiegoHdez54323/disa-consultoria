@@ -6,15 +6,22 @@ import DisaFullLogo from "../../assets/DisaFullLogo.svg";
 // Links usando las rutas definidas en company.ts
 const footerLinks = {
   servicios: [
-    { label: "Desarrollo a Medida", href: company.routes.services },
-    { label: "Integraciones & APIs", href: company.routes.services },
-    { label: "Consultoría", href: company.routes.services },
-    { label: "Cloud & DevOps", href: company.routes.services },
+    { label: "Aplicaciones Móviles", href: company.routes.services },
+    { label: "Sistemas Enterprise", href: company.routes.services },
+    { label: "Dashboards & BI", href: company.routes.services },
+    { label: "E-commerce & B2B", href: company.routes.services },
+    { label: "Aplicaciones Web", href: company.routes.services },
+    {
+      label: "Integraciones & Automatizaciones",
+      href: company.routes.services,
+    },
   ],
   empresa: [
-    { label: "Nosotros", href: "/nosotros" }, // Si no tienes ruta 'about' en config, usa hardcode o agrégala
+    { label: "Precios", href: company.routes.services },
     { label: "Portafolio", href: company.routes.portfolio },
     { label: "Blog", href: company.routes.blog },
+    { label: "Nosotros", href: company.routes.nosotros }, // Si no tienes ruta 'about' en config, usa hardcode o agrégala
+
     { label: "Contacto", href: company.routes.contact },
   ],
   legal: [

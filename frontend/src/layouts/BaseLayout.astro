@@ -27,6 +27,7 @@ const {
   ogType,
   schema,
 } = Astro.props;
+import { Toaster } from "@/components/ui/sonner";
 ---
 
 <html lang="es">
@@ -53,6 +54,7 @@ const {
     <main class="flex-1">
       <slot />
     </main>
+    <Toaster client:load />
     <Footer />
 
     <script>
