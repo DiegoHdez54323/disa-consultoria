@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageSquare, ArrowRight } from "lucide-react";
 import { company } from "../../config/company";
 import { GlareCard } from "@/components/ui/glare-card"; // ajusta ruta real
+import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 // Definimos los métodos de contacto dinámicamente
 const contactMethods = [
   {
