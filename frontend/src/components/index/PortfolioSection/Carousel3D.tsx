@@ -132,7 +132,7 @@ export const Carousel3D = ({
                     transition-all duration-500 
                     ${
                       position === "center"
-                        ? "glow-primary-md rounded-2xl "
+                        ? "glow-primary-sm md:glow-primary lg:glow-primary-md rounded-2xl "
                         : "pointer-events-none md:pointer-events-none"
                     }
                   `}
