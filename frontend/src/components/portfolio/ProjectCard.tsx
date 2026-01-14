@@ -4,20 +4,34 @@ import { ExternalLink, ArrowUpRight } from "lucide-react";
 import type { PortfolioProject } from "../../sanity/types/portfolio";
 import { urlForImage } from "../../sanity/lib/url-for-image";
 
-export const ProjectCard = ({ project, index }: { project: PortfolioProject; index: number }) => {
+export const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: PortfolioProject;
+  index: number;
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
 
-  const imageUrl = project.image?.source 
-    ? urlForImage(project.image.source).width(800).height(600).url() 
+  const imageUrl = project.image?.source
+    ? urlForImage(project.image.source).width(800).height(600).url()
     : "https://via.placeholder.com/800x600";
 
   const mainCategory = project.categories?.[0]?.title || "Sin categoría";
-  const gradientClass = project.gradient || "from-primary to-secondary";
-  
+  const GRADIENTS: Record<string, string> = {
+    aurora: "from-blue-500 via-indigo-500 to-fuchsia-500",
+    ocean: "from-cyan-500 via-sky-500 to-blue-600",
+    emerald: "from-emerald-500 via-teal-500 to-cyan-500",
+    purple: "from-violet-500 via-fuchsia-500 to-pink-500",
+  };
+
+  const gradientClass =
+    GRADIENTS[project.gradient ?? "aurora"] ?? GRADIENTS.aurora;
+
   // URL interna para el detalle del proyecto
   const detailUrl = project.slug ? `/portafolio/${project.slug}` : "#";
 
@@ -31,14 +45,14 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
       onMouseLeave={handleMouseLeave}
       className="group relative h-full"
     >
-      <a href={detailUrl} className="block h-full"> {/* Envolvemos todo en un enlace interno */}
-        
+      <a href={detailUrl} className="block h-full">
+        {" "}
+        {/* Envolvemos todo en un enlace interno */}
         {/* Glow effect */}
         <motion.div
           animate={{ opacity: isHovered ? 0.6 : 0 }}
-          className={`absolute -inset-2 bg-gradient-to-r ${gradientClass} rounded-3xl blur-2xl transition-opacity duration-500`}
+          className={`pointer-events-none absolute -inset-2 bg-gradient-to-r ${gradientClass} rounded-3xl blur-2xl transition-opacity duration-500`}
         />
-        
         {/* Card */}
         <div className="relative h-full bg-card/90 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden flex flex-col">
           {/* Image section */}
@@ -50,10 +64,14 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
               animate={{ scale: isHovered ? 1.1 : 1 }}
               transition={{ duration: 0.6 }}
             />
-            
-            <div className={`absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent`} />
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass} opacity-30 group-hover:opacity-50 transition-opacity duration-500`} />
-            
+
+            <div
+              className={`absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent`}
+            />
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${gradientClass} opacity-30 group-hover:opacity-50 transition-opacity duration-500`}
+            />
+
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +79,7 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
             >
               {project.year}
             </motion.div>
-            
+
             <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md text-xs font-inter font-medium text-primary">
               {mainCategory}
             </div>
@@ -71,12 +89,12 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -10 }}
-                className="absolute top-4 right-4 z-20" 
+                className="absolute top-4 right-4 z-20"
               >
                 <div
                   onClick={(e) => {
-                     e.stopPropagation(); // Evita navegar al detalle si se clickea el botón externo
-                     window.open(project.link, '_blank');
+                    e.stopPropagation(); // Evita navegar al detalle si se clickea el botón externo
+                    window.open(project.link, "_blank");
                   }}
                   className="p-2.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 hover:bg-primary hover:border-primary transition-colors cursor-pointer flex items-center justify-center"
                   title="Visitar sitio web"
@@ -98,11 +116,11 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
                 <ArrowUpRight className="w-5 h-5 text-primary" />
               </motion.span>
             </h3>
-            
+
             <p className="font-inter text-sm text-muted-foreground mb-4 line-clamp-2 flex-grow">
               {project.description}
             </p>
-            
+
             <div className="flex flex-wrap gap-2 mt-auto">
               {project.technologies?.map((tech, i) => (
                 <motion.span
@@ -118,7 +136,7 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
               ))}
             </div>
           </div>
-          
+
           <motion.div
             className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${gradientClass}`}
             initial={{ scaleX: 0 }}
