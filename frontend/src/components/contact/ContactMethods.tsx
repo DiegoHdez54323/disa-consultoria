@@ -40,60 +40,6 @@ const contactMethods = [
   },
 ];
 
-const ContactCard = ({
-  method,
-  index,
-}: {
-  method: (typeof contactMethods)[0];
-  index: number;
-}) => {
-  return (
-    <motion.a
-      href={method.href}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="group relative block w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] min-w-[280px]" // Clases para ancho flexible
-    >
-      <div
-        className={`absolute -inset-1 bg-gradient-to-r ${method.gradient} rounded-2xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500`}
-      />
-
-      <div className="relative p-6 rounded-2xl bg-gradient-card border border-border/50 group-hover:border-primary/30 transition-all duration-300 overflow-hidden h-full">
-        {/* Glow effect on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl translate-x-8 -translate-y-8" />
-        </div>
-
-        {/* Number Badge */}
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center">
-          <span className="text-xs font-sora font-bold text-muted-foreground">
-            0{index + 1}
-          </span>
-        </div>
-
-        {/* Icon */}
-        <div
-          className={`relative w-14 h-14 rounded-xl bg-gradient-to-br ${method.gradient} p-[1px] mb-4`}
-        >
-          <div className="w-full h-full rounded-xl bg-background flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
-            <method.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
-          </div>
-        </div>
-
-        <h3 className="font-sora text-sm font-medium text-muted-foreground mb-1">
-          {method.title}
-        </h3>
-        <p className="font-inter text-lg font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-          {method.value}
-        </p>
-
-        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-          <ArrowRight className="w-5 h-5 text-primary" />
-        </div>
-      </div>
-    </motion.a>
-  );
-};
-
 export const ContactMethods = () => {
   return (
     <section className="py-12">
@@ -101,7 +47,46 @@ export const ContactMethods = () => {
         {/* Usamos Flexbox con wrap para que se acomoden centrados sin importar si son 4 o 5 elementos */}
         <div className="flex flex-wrap justify-center gap-6">
           {contactMethods.map((method, index) => (
-            <ContactCard key={index} method={method} index={index} />
+            <motion.a
+              key={method.title}
+              href={method.href}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className="group relative block w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] min-w-[280px]"
+            >
+              <GlareCard className="relative select-text p-6  bg-gradient-card border border-border/50 group-hover:border-primary/30 transition-all duration-300 overflow-hidden h-full">
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10  blur-2xl translate-x-8 -translate-y-8" />
+                </div>
+
+                {/* Number Badge */}
+                <div className="absolute top-3 right-3 w-8 h-8  bg-muted/50 flex items-center justify-center">
+                  <span className="text-xs font-sora font-bold text-muted-foreground">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div
+                  className={`relative w-14 h-14 rounded-xl bg-gradient-to-br ${method.gradient} p-[1px] mb-4`}
+                >
+                  <div className="w-full h-full rounded-xl bg-background flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
+                    <method.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
+                  </div>
+                </div>
+
+                <h3 className="font-sora text-sm font-medium text-muted-foreground mb-1">
+                  {method.title}
+                </h3>
+                <p className="font-inter text-lg font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                  {method.value}
+                </p>
+
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                  <ArrowRight className="w-5 h-5 text-primary" />
+                </div>
+              </GlareCard>
+            </motion.a>
           ))}
         </div>
       </div>
