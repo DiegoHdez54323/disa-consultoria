@@ -1,30 +1,35 @@
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { Mail, Phone, MapPin, MessageSquare, ArrowRight } from "lucide-react";
 import { company } from "../../config/company";
+import type { MouseEvent } from "react";
 import { GlareCard } from "@/components/ui/glare-card"; // ajusta ruta real
-import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
+
 // Definimos los métodos de contacto dinámicamente
 const contactMethods = [
   {
     icon: Mail,
     title: "Email",
     value: company.contact.email,
-    href: `mailto:${company.contact.email}`,
+
     gradient: "from-primary to-accent",
+    copyValue: company.contact.email,
   },
   {
     icon: Phone,
     title: "Teléfono Principal",
     value: company.contact.phone1,
-    href: `tel:${company.contact.phone1.replace(/\s/g, "")}`,
+
     gradient: "from-accent to-secondary",
+    copyValue: company.contact.phone1,
   },
   {
     icon: Phone,
     title: "Teléfono Secundario",
     value: company.contact.phone2,
-    href: `tel:${company.contact.phone2.replace(/\s/g, "")}`,
-    gradient: "from-secondary to-accent", // Gradiente invertido para variedad
+
+    gradient: "from-secondary to-accent",
+    copyValue: company.contact.phone2,
   },
   {
     icon: MapPin,
@@ -42,6 +47,43 @@ const contactMethods = [
 ];
 
 export const ContactMethods = () => {
+  const handleCopy = async (
+    event: MouseEvent<HTMLAnchorElement>,
+    value?: string,
+    title?: string
+  ) => {
+    // Si no hay valor para copiar, no interceptes: deja navegar normal (href)
+    if (!value) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = value;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+
+      toast.success(`${title ?? "Contenido"} copiado`, {
+        description: value,
+        className: "!bg-slate-800 text-primary-foreground !border-primary/40",
+      });
+    } catch {
+      toast.error("No se pudo copiar", {
+        description: "Intenta de nuevo o copia manualmente.",
+      });
+    }
+  };
+
   return (
     <section className="py-12">
       <div className="container mx-auto px-6">
@@ -51,8 +93,12 @@ export const ContactMethods = () => {
             <motion.a
               key={method.title}
               href={method.href}
+              draggable={false}
+              onClick={(event) =>
+                void handleCopy(event, method.copyValue, method.title)
+              }
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="group relative block w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] min-w-[280px]"
+              className="cursor-pointer group relative block w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] min-w-[280px]"
             >
               <GlareCard className="relative select-text p-6  bg-gradient-card border border-border/50 group-hover:border-primary/30 transition-all duration-300 overflow-hidden h-full">
                 {/* Glow effect on hover */}

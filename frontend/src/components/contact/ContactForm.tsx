@@ -25,10 +25,7 @@ export const ContactForm = () => {
           onSubmit={submitForm}
           className="relative p-8 md:p-10 rounded-2xl bg-gradient-card border border-border/50 backdrop-blur-sm"
         >
-          <ShineBorder
-            shineColor={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
-            borderWidth={0.8}
-          />
+          <ShineBorder shineColor={["#8f15ca", "#10B3F1"]} borderWidth={0.8} />
 
           {/* --- HONEYPOT --- */}
           <div
