@@ -1,32 +1,13 @@
-import React, { useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 import type { PortfolioProject } from "../../sanity/types/portfolio";
 import { urlForImage } from "../../sanity/lib/url-for-image";
 
 export const ProjectCard = ({ project, index }: { project: PortfolioProject; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  
-  const rotateX = useSpring(useTransform(y, [-100, 100], [8, -8]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-8, 8]), { stiffness: 300, damping: 30 });
-  const scale = useSpring(isHovered ? 1.02 : 1, { stiffness: 300, damping: 30 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set(e.clientX - centerX);
-    y.set(e.clientY - centerY);
-  };
 
   const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
     setIsHovered(false);
   };
 
@@ -42,16 +23,13 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
 
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d" }}
-      className="group relative perspective-1000 h-full"
+      className="group relative h-full"
     >
       <a href={detailUrl} className="block h-full"> {/* Envolvemos todo en un enlace interno */}
         
@@ -110,7 +88,7 @@ export const ProjectCard = ({ project, index }: { project: PortfolioProject; ind
           </div>
 
           {/* Content */}
-          <div className="p-6 flex flex-col flex-grow" style={{ transform: "translateZ(30px)" }}>
+          <div className="p-6 flex flex-col flex-grow">
             <h3 className="font-sora text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
               {project.title}
               <motion.span
