@@ -41,7 +41,7 @@ export const EnterpriseCtaReact = () => {
       <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 via-transparent to-cyan-500/5 group-hover:opacity-100 transition-opacity duration-700" />
       <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
 
-      <div className="relative z-10 p-8 md:p-10 flex flex-col lg:flex-row items-start gap-12">
+      <div className="relative z-10 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
         {/* --- IZQUIERDA: Contenido Principal --- */}
         <div className="flex-1 text-left">
           {/* Badge Superior */}
@@ -50,9 +50,9 @@ export const EnterpriseCtaReact = () => {
             <span>Enterprise Grade Solutions</span>
           </div>
 
-          <h4 className="font-orbitron text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
-            Ingeniería de Software para <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400">
+          <h4 className="font-orbitron text-2xl sm:text-[28px] md:text-3xl font-bold text-white mb-4 leading-tight">
+            <span className="block">Ingeniería de Software para</span>{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400 block sm:inline">
               Operaciones Críticas
             </span>
           </h4>
@@ -65,7 +65,7 @@ export const EnterpriseCtaReact = () => {
           </p>
 
           {/* Feature 1: Lista de Beneficios Técnicos */}
-          <ul className="space-y-3 mb-8 border-l-2 border-white/5 pl-4">
+          <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 border-l-2 border-white/5 pl-4">
             {benefits.map((item, idx) => (
               <li
                 key={idx}
@@ -78,7 +78,7 @@ export const EnterpriseCtaReact = () => {
           </ul>
 
           {/* Feature 2: Grid de Specs (Nueva Información) */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
             {specs.map((spec, idx) => (
               <div
                 key={idx}
@@ -96,7 +96,7 @@ export const EnterpriseCtaReact = () => {
           <div className="flex flex-wrap gap-4">
             <a
               href="/contacto"
-              className="font-orbitron inline-flex items-center gap-2 py-4 px-6 rounded-xl bg-linear-to-r from-emerald-600 to-emerald-500 text-white text-base font-bold hover:shadow-lg hover:shadow-emerald-500/25 transition-all transform hover:-translate-y-0.5"
+              className="font-orbitron inline-flex w-full sm:w-auto justify-center items-center gap-2 py-4 px-6 rounded-xl bg-linear-to-r from-emerald-600 to-emerald-500 text-white text-base font-bold hover:shadow-lg hover:shadow-emerald-500/25 transition-all transform hover:-translate-y-0.5"
             >
               Solicitar Consultoría Técnica
               <ArrowRight size={14} />

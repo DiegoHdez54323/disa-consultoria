@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, AlertCircle, Info } from "lucide-react";
 import { useState } from "react";
-import { useContactForm } from "../../hooks/useContactForm"; 
+import { useContactForm } from "../../hooks/useContactForm";
+import { ShineBorder } from "@/components/ui/shine-border";
 
 export const ContactForm = () => {
   const { formData, handleChange, submitForm, status, errors, errorMessage } =
@@ -24,7 +25,10 @@ export const ContactForm = () => {
           onSubmit={submitForm}
           className="relative p-8 md:p-10 rounded-2xl bg-gradient-card border border-border/50 backdrop-blur-sm"
         >
-          <div className="absolute inset-0 rounded-2xl animated-border opacity-30 mb-5" />
+          <ShineBorder
+            shineColor={["#FF0080", "#7928CA", "#0070F3", "#38bdf8"]}
+            borderWidth={0.8}
+          />
 
           {/* --- HONEYPOT --- */}
           <div
@@ -47,15 +51,17 @@ export const ContactForm = () => {
             <h3 className="font-sora text-2xl font-bold text-foreground mb-2">
               Inicia tu Transformación
             </h3>
-            
+
             {/* Mensaje de Expectativas */}
             <div className="mt-4 mb-2 bg-primary/5 border border-primary/20 p-4 rounded-xl">
-                <h4 className="text-primary font-semibold text-sm mb-1 flex items-center gap-2">
-                    <Info className="w-4 h-4"/> ¿Qué pasa al enviar?
-                </h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    Agendaremos una <strong>Llamada Inicial de 15 min</strong> para validar tu idea y darte un rango de presupuesto estimado. Sin compromisos.
-                </p>
+              <h4 className="text-primary font-semibold text-sm mb-1 flex items-center gap-2">
+                <Info className="w-4 h-4" /> ¿Qué pasa al enviar?
+              </h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Agendaremos una <strong>Llamada Inicial de 15 min</strong> para
+                validar tu idea y darte un rango de presupuesto estimado. Sin
+                compromisos.
+              </p>
             </div>
           </div>
 
@@ -91,7 +97,10 @@ export const ContactForm = () => {
             <div className="grid sm:grid-cols-2 gap-6">
               {/* Nombre */}
               <div className="relative">
-                <InputLabel focused={focusedField === "name"} label="Nombre *" />
+                <InputLabel
+                  focused={focusedField === "name"}
+                  label="Nombre *"
+                />
                 <input
                   type="text"
                   value={formData.name}
@@ -101,12 +110,19 @@ export const ContactForm = () => {
                   className={`w-full px-4 py-3 rounded-xl bg-muted/30 border text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.name ? "border-red-500/50" : "border-border/50"}`}
                   placeholder="Tu nombre"
                 />
-                {errors.name && <span className="text-xs text-red-500 mt-1 ml-1">{errors.name}</span>}
+                {errors.name && (
+                  <span className="text-xs text-red-500 mt-1 ml-1">
+                    {errors.name}
+                  </span>
+                )}
               </div>
 
               {/* Teléfono - NUEVO */}
               <div className="relative">
-                <InputLabel focused={focusedField === "phone"} label="WhatsApp / Teléfono *" />
+                <InputLabel
+                  focused={focusedField === "phone"}
+                  label="WhatsApp / Teléfono *"
+                />
                 <input
                   type="tel"
                   value={formData.phone}
@@ -116,44 +132,61 @@ export const ContactForm = () => {
                   className={`w-full px-4 py-3 rounded-xl bg-muted/30 border text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.phone ? "border-red-500/50" : "border-border/50"}`}
                   placeholder="55 1234 5678"
                 />
-                {errors.phone && <span className="text-xs text-red-500 mt-1 ml-1">{errors.phone}</span>}
+                {errors.phone && (
+                  <span className="text-xs text-red-500 mt-1 ml-1">
+                    {errors.phone}
+                  </span>
+                )}
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
-                {/* Email */}
-                <div className="relative">
-                    <InputLabel focused={focusedField === "email"} label="Email *" />
-                    <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    className={`w-full px-4 py-3 rounded-xl bg-muted/30 border text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.email ? "border-red-500/50" : "border-border/50"}`}
-                    placeholder="tu@email.com"
-                    />
-                    {errors.email && <span className="text-xs text-red-500 mt-1 ml-1">{errors.email}</span>}
-                </div>
+              {/* Email */}
+              <div className="relative">
+                <InputLabel
+                  focused={focusedField === "email"}
+                  label="Email *"
+                />
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  onFocus={() => setFocusedField("email")}
+                  onBlur={() => setFocusedField(null)}
+                  className={`w-full px-4 py-3 rounded-xl bg-muted/30 border text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.email ? "border-red-500/50" : "border-border/50"}`}
+                  placeholder="tu@email.com"
+                />
+                {errors.email && (
+                  <span className="text-xs text-red-500 mt-1 ml-1">
+                    {errors.email}
+                  </span>
+                )}
+              </div>
 
-                {/* Empresa */}
-                <div className="relative">
-                    <InputLabel focused={focusedField === "company"} label="Empresa" />
-                    <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) => handleChange("company", e.target.value)}
-                    onFocus={() => setFocusedField("company")}
-                    onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 py-3 rounded-xl bg-muted/30 border border-border/50 text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
-                    placeholder="Nombre de tu negocio"
-                    />
-                </div>
+              {/* Empresa */}
+              <div className="relative">
+                <InputLabel
+                  focused={focusedField === "company"}
+                  label="Empresa"
+                />
+                <input
+                  type="text"
+                  value={formData.company}
+                  onChange={(e) => handleChange("company", e.target.value)}
+                  onFocus={() => setFocusedField("company")}
+                  onBlur={() => setFocusedField(null)}
+                  className="w-full px-4 py-3 rounded-xl bg-muted/30 border border-border/50 text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                  placeholder="Nombre de tu negocio"
+                />
+              </div>
             </div>
 
             {/* Mensaje */}
             <div className="relative">
-              <InputLabel focused={focusedField === "message"} label="¿Qué quieres resolver? *" />
+              <InputLabel
+                focused={focusedField === "message"}
+                label="¿Qué quieres resolver? *"
+              />
               <textarea
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
@@ -163,7 +196,11 @@ export const ContactForm = () => {
                 className={`w-full px-4 py-3 rounded-xl bg-muted/30 border text-foreground font-inter focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none ${errors.message ? "border-red-500/50" : "border-border/50"}`}
                 placeholder="Ej: Necesito un sistema para controlar mi inventario y ventas..."
               />
-              {errors.message && <span className="text-xs text-red-500 mt-1 ml-1">{errors.message}</span>}
+              {errors.message && (
+                <span className="text-xs text-red-500 mt-1 ml-1">
+                  {errors.message}
+                </span>
+              )}
             </div>
 
             <motion.button
@@ -180,7 +217,11 @@ export const ContactForm = () => {
                   <>
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
                       className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                     />
                     Procesando...
@@ -205,9 +246,17 @@ export const ContactForm = () => {
   );
 };
 
-const InputLabel = ({ focused, label }: { focused: boolean; label: string }) => (
+const InputLabel = ({
+  focused,
+  label,
+}: {
+  focused: boolean;
+  label: string;
+}) => (
   <motion.label
-    animate={{ color: focused ? "hsl(var(--primary))" : "hsl(var(--foreground))" }}
+    animate={{
+      color: focused ? "hsl(var(--primary))" : "hsl(var(--foreground))",
+    }}
     className="block text-sm font-inter font-medium mb-2"
   >
     {label}
