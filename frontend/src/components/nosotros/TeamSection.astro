@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import Member1Img from "../../assets/Alexander-Diaz.jpg";
+import Member2Img from "../../assets/Diego-Hernandez.jpeg";
+
+const team = [
+    {
+        name: "Nombre Uno",
+        role: "CEO & Fundador",
+        image: Member1Img,
+        bio: "Experto en arquitectura de software y liderazgo técnico.",
+    },
+    {
+        name: "Nombre Dos",
+        role: "CTO / Lead Developer",
+        image: Member2Img,
+        bio: "Especialista en desarrollo Full Stack y DevOps.",
+    },
+];
+---
+
+<section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-primary/5 -z-10"></div>
+
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <span
+                class="text-primary font-medium text-sm tracking-wider uppercase mb-4 block"
+            >
+                Talento Humano
+            </span>
+            <h2 class="font-orbitron text-3xl md:text-4xl font-bold mb-4">
+                Nuestro <span class="text-gradient-primary">Equipo</span>
+            </h2>
+            <p class="text-muted-foreground max-w-2xl mx-auto">
+                Conoce a las mentes detrás de cada solución digital.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {
+                team.map((member) => (
+                    <div class="group relative rounded-2xl overflow-hidden border border-border/50 bg-card/30 hover:border-primary/50 transition-all duration-500">
+                        <div class="aspect-4/5 overflow-hidden relative">
+                            <Image
+                                src={member.image}
+                                alt={member.name}
+                                width={800}
+                                quality="high"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-60" />
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-sora text-2xl font-bold text-foreground mb-1">
+                                {member.name}
+                            </h3>
+                            <p class="text-primary font-medium tracking-wide mb-2">
+                                {member.role}
+                            </p>
+                            <p class="text-sm text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {member.bio}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
