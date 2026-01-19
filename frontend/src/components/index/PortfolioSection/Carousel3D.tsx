@@ -131,9 +131,10 @@ export const Carousel3D = ({
                 <motion.div
                   className={`
                     transition-all duration-500 
-                    ${position === "center"
-                      ? "glow-primary-md rounded-2xl "
-                      : "pointer-events-none md:pointer-events-none"
+                    ${
+                      position === "center"
+                        ? "glow-primary-sm md:glow-primary lg:glow-primary-md rounded-2xl "
+                        : "pointer-events-none md:pointer-events-none"
                     }
                   `}
                   whileHover={position === "center" ? { scale: 1.02 } : {}}

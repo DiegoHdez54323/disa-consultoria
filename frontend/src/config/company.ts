@@ -18,7 +18,7 @@ export const company = {
     github: "https://github.com/",
     linkedin: "https://linkedin.com/",
     twitter: "https://twitter.com/",
-    instagram: "https://instagram.com/",
+    instagram: "https://www.instagram.com/disasoftware1/",
   },
 
   routes: {
@@ -26,6 +26,7 @@ export const company = {
     services: "/precios",
     portfolio: "/portafolio",
     blog: "/blog",
+    nosotros: "/nosotros",
     contact: "/contacto",
     privacy: "/privacidad",
     terms: "/terminos",
