@@ -2,19 +2,33 @@
 import { Image } from "astro:assets";
 import Member1Img from "../../assets/Alexander-Diaz.jpg";
 import Member2Img from "../../assets/Diego-Hernandez.jpeg";
+import Member3Img from "../../assets/Alberto-Salgado.png";
+import Member4Img from "../../assets/Mariana-Villasenor.jpg";
 
 const team = [
   {
     name: "Alexander Díaz",
-    role: "Co-Founder — Consultor Principal",
+    role: "Socio Co-Founder — Consultor Principal",
     image: Member1Img,
     bio: "Experto en arquitectura de software y liderazgo técnico.",
   },
   {
     name: "Diego Hernández",
-    role: "Co-Founder — Desarrollador Principal",
+    role: "Socio Co-Founder — Desarrollador Principal",
     image: Member2Img,
     bio: "Especialista en desarrollo Full Stack y DevOps.",
+  },
+  {
+    name: "Alberto Salgado",
+    role: "Desarrollador Junior",
+    image: Member3Img,
+    bio: "Apoya en desarrollo y validación funcional del producto.",
+  },
+  {
+    name: "Mariana Villaseñor",
+    role: "Diseñadora UX/UI",
+    image: Member4Img,
+    bio: "Diseña experiencias e interfaces alineadas a objetivos.",
   },
 ];
 ---
@@ -37,7 +51,7 @@ const team = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       {
         team.map((member) => (
           <div class="group relative rounded-2xl overflow-hidden border border-border/50 bg-card/30 hover:border-primary/50 transition-all duration-500">
